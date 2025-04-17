@@ -2,6 +2,9 @@ import SwaggerParser from '@apidevtools/swagger-parser'
 import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 /**
  * @typedef {Object} OpenAPISpec
@@ -46,7 +49,7 @@ export class ApiCoverage {
     this.queryParamsCoverage = new Map()
     this.coverageType = 'basic'
     this.config = config
-    this.TEMPLATE_PATH = path.resolve('utils/templates/index.html')
+    this.TEMPLATE_PATH = path.resolve(__dirname, './templates/index.html')
     this.REPORT_PATH = config['html-report-path']
   }
 
