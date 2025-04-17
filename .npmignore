@@ -10,3 +10,5 @@ test-results
 /coverage/
 /reports/
 config.json
+apispec.json
+.nvmrc
