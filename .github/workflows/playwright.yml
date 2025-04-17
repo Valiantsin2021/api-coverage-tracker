@@ -17,10 +17,8 @@ jobs:
         node-version: 22
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test fakestore_coverage_api.spec.js
+      run: npx playwright test fakestore_coverage._api.spec.js
     - name: Upload Coverage report
       uses: actions/upload-artifact@v4
       if: always()
