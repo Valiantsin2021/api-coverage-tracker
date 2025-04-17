@@ -6,7 +6,9 @@ This library aimed to provide the automated API coverage measurement functionali
 
 A universal library for tracking API coverage against OpenAPI/Swagger specifications. This library can work with various HTTP clients including Playwright, Axios, Fetch, and more (via register of the response in the exposed method).
 
-It calculates the API testing coverage based on the endpoints, status codes per endpoint, query parameters per endpoint covered. TODO - add coverage for body parameters
+It calculates the API testing coverage based on the endpoints, status codes per endpoint, query parameters per endpoint covered. 
+
+TODO - add history runs statistics storage and collection to reflect in HTML report
 
 ## Features
 
