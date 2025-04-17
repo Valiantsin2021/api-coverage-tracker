@@ -1,0 +1,11 @@
+e2e
+.gitignore
+eslint.config.js
+.prettierignore
+.prettierrc.json
+playwright.config.js
+test-results
+.github/
+/fixtures/
+/coverage/
+/reports/

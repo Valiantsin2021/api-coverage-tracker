@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "target": "esnext",
+    "checkJs": true,
+    "moduleResolution": "nodenext",
+    // "strict": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@fixtures/*": [
+        "fixtures/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ]
+    }
+  },
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

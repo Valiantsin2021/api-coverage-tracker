@@ -1,0 +1,16 @@
+{
+  "services": [
+    {
+      "key": "fakestore-api-service",
+      "name": "FakeStore API",
+      "tags": [
+        "API",
+        "COVERAGE"
+      ],
+      "repository": "",
+      "swaggerUrl": "https://fakestoreapi.com/fakestoreapi.json",
+      "swaggerFile": null
+    }
+  ],
+  "html-report-path": "./reports/index.html"
+}
