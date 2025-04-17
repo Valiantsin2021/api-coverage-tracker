@@ -1,10 +1,22 @@
-# Universal API Coverage Tracker
+<h1 align="center">Universal API Coverage Tracker</h1>
+</p>
+<p align="center">
+   <a href="https://github.com/Valiantsin2021/api-coverage-tracker/tags/"><img src="https://img.shields.io/github/tag/Valiantsin2021/api-coverage-tracker" alt="playwwright-performance versions" /></a>
+   <a href="https://www.npmjs.com/package/api-coverage-tracker"><img alt="api-coverage-tracker available on NPM" src="https://img.shields.io/npm/dy/api-coverage-tracker"></a>
+   <a href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs are welcome" /></a>
+   <a href="https://github.com/Valiantsin2021/api-coverage-tracker/issues/"><img src="https://img.shields.io/github/issues/Valiantsin2021/api-coverage-tracker" alt="api-coverage-tracker issues" /></a>
+   <img src="https://img.shields.io/github/stars/Valiantsin2021/api-coverage-tracker" alt="api-coverage-tracker stars" />
+   <img src="https://img.shields.io/github/forks/Valiantsin2021/api-coverage-tracker" alt="api-coverage-tracker forks" />
+   <img src="https://img.shields.io/github/license/Valiantsin2021/api-coverage-tracker" alt="api-coverage-tracker license" />
+   <a href="https://GitHub.com/Valiantsin2021/api-coverage-tracker/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="api-coverage-tracker is maintained" /></a>
+   <a href="https://github.com/Valiantsin2021/api-coverage-tracker"><img src="https://img.shields.io/badge/Author-Valentin%20Lutchanka-blue" alt="api-coverage-tracker author" /></a>
+   <a href="https://github.com/Valiantsin2021/api-coverage-tracker/actions/workflows/ci.yml"><img src="https://github.com/Valiantsin2021/api-coverage-tracker/actions/workflows/playwright.yml/badge.svg?branch=main" alt="api-coverage-tracker ci tests" /></a>
+</p>
+<h3 align="center">A universal library for tracking API coverage against OpenAPI/Swagger specifications. This library can work with various HTTP clients including Playwright, Axios, Fetch, and more (via register of the response in the exposed method).</h3>
 
 Acknoledgements to Nikita Filonov for Idea and great standalone HTML report file- https://github.com/Nikita-Filonov
 
 This library aimed to provide the automated API coverage measurement functionality for main JavaScript API clients and tools.
-
-A universal library for tracking API coverage against OpenAPI/Swagger specifications. This library can work with various HTTP clients including Playwright, Axios, Fetch, and more (via register of the response in the exposed method).
 
 It calculates the API testing coverage based on the endpoints, status codes per endpoint, query parameters per endpoint covered. 
 
@@ -12,7 +24,7 @@ TODO - add history runs statistics storage and collection to reflect in HTML rep
 
 ## Features
 
-- HTML report generation
+- Automated HTML report generation
 - Load OpenAPI/Swagger specifications from files or URLs
 - Track API requests made through various HTTP clients
 - Generate coverage reports showing which endpoints are covered

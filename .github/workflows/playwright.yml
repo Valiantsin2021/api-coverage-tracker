@@ -27,3 +27,11 @@ jobs:
         path: reports/index.html
         retention-days: 30
         if-no-files-found: ignore
+    - name: Semantic Release 🚀
+      uses: cycjimmy/semantic-release-action@v4
+      with:
+        branch: main
+        tag_format: v${version}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
