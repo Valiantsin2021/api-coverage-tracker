@@ -3,20 +3,18 @@ import { ApiCoverage } from 'api-coverage-tracker'
 import config from '../config.json' with { type: 'json' }
 
 const apiCoverage = new ApiCoverage(config)
-const HISTORY_PATH = './coverage/coverage-history.json'
-const FINAL_REPORT = './coverage/coverage-report.json'
 await apiCoverage.loadSpec('https://petstore.swagger.io/v2/swagger.json')
-
+apiCoverage.setDebug(false)
 test.beforeEach(async ({ request }) => {
   apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'basic' })
 })
 
 test.afterEach(async ({ request }) => {
-  await apiCoverage.saveHistory(HISTORY_PATH)
+  await apiCoverage.saveHistory()
   apiCoverage.stopTracking(request) // always runs even on test failure
 })
 test.afterAll(async () => {
-  await apiCoverage.generateReport(FINAL_REPORT, HISTORY_PATH)
+  await apiCoverage.generateReport()
 })
 test.describe.configure({ mode: 'default' })
 const baseUrl = 'https://petstore.swagger.io/v2'

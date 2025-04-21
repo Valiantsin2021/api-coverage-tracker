@@ -20,7 +20,9 @@ This library aimed to provide the automated API coverage measurement functionali
 
 It calculates the API testing coverage based on the endpoints, status codes per endpoint, query parameters per endpoint covered. 
 
-TODO - add history runs statistics storage and collection to reflect in HTML report
+For Axios and Fetch clients, it also tracks the previous coverage statistics.
+
+For Playwright due to specifics of Playwright workers spawn logics this functionality is not available at the moment.
 
 ## Features
 
@@ -29,20 +31,40 @@ TODO - add history runs statistics storage and collection to reflect in HTML rep
 - Track API requests made through various HTTP clients
 - Generate coverage reports showing which endpoints are covered
 - Support for both OpenAPI 2.0 (Swagger) and OpenAPI 3.0+ specifications
+- Saves and reflects in report the history of coverage changes
 - Compatible with multiple HTTP clients:
   - Playwright
   - Axios
   - Fetch
   - Custom HTTP clients (via manual registration)
 
+## Important changes between 1.0.4 and 1.1.0 versions:
+
+- Methods `saveHistory` and `generateReport` do not need any parameters anymore.
+- Paths to reports files shold be provided in the config.json file - see the below example.
+- History of the coverage changes is now reflected in HTML report for Axios and Fetch clients
+
 ## Installation
 
 ```bash
-npm install api-coverage-tracker
+npm install -D api-coverage-tracker
 ```
 ## Configuration
 
 The library requires a configuration object with service information:
+
+
+- services: An array of service objects with the following properties:
+  - key: A unique identifier for the service
+  - name: The name of the service
+  - tags: An array of tags associated with the service
+  - repository: The repository URL for the service
+  - swaggerUrl: The URL of the OpenAPI/Swagger specification
+  - swaggerFile: The local path to the OpenAPI/Swagger specification file
+- json-report-path: The path to save the JSON report file
+- json-report-history-path: The path to save the JSON history file
+- html-report-path: The path to save the HTML report file
+- stats-path: The path to save the statistics file
 
 ```javascript
 // config.json example
@@ -57,7 +79,11 @@ The library requires a configuration object with service information:
       "swaggerUrl": "https://petstore.swagger.io/v2/swagger.json",
       "swaggerFile": "./specs/petstore.json"
     }
-  ]
+  ],
+  "json-report-path": "./reports/report.json",
+  "json-report-history-path": "./reports/history.json",
+  "html-report-path": "./reports/index.html",
+  "stats-path": "./reports/stats.json"
 }
 ```
 
@@ -94,8 +120,6 @@ import { ApiCoverage } from 'api-coverage-tracker'
 import config from './config.json' with { type: 'json' }
 
 const apiCoverage = new ApiCoverage(config)
-const HISTORY_PATH = './coverage/coverage-history.json'
-const REPORT_PATH = './coverage/coverage-report.json'
 await apiCoverage.loadSpec('https://fakestoreapi.com/fakestoreapi.json')
 
 test.beforeEach(async ({ request }) => {
@@ -103,11 +127,11 @@ test.beforeEach(async ({ request }) => {
 })
 
 test.afterEach(async ({ request }) => {
-  apiCoverage.saveHistory(HISTORY_PATH)
+  apiCoverage.saveHistory()
   apiCoverage.stopTracking(request) // always runs even on test failure
 })
 test.afterAll(async () => {
-  const report = apiCoverage.generateReport(REPORT_PATH, HISTORY_PATH)
+  const report = apiCoverage.generateReport()
 })
 test('API coverage test', async ({ request }) => {
 
@@ -144,9 +168,9 @@ async function testApi() {
     apiCoverage.stopTracking(axiosInstance);
     const stats = apiCoverage.getCoverageStats();
     console.log('Coverage stats:', stats);
-    apiCoverage.saveHistory('./coverage-history.json')
+    apiCoverage.saveHistory()
 
-    apiCoverage.generateReport('./coverage-report.json', './coverage-history.json')
+    apiCoverage.generateReport()
   }
 }
 ```
@@ -171,9 +195,9 @@ async function testApi() {
     
     const stats = apiCoverage.getCoverageStats();
     console.log('Coverage stats:', stats);
-    apiCoverage.saveHistory('./coverage-history.json')
+    apiCoverage.saveHistory()
 
-    apiCoverage.generateReport('./coverage-report.json', './coverage-history.json')
+    apiCoverage.generateReport()
   }
 }
 ```
@@ -196,9 +220,9 @@ async function testApi() {
   
   const stats = apiCoverage.getCoverageStats();
   console.log('Coverage stats:', stats);
-  apiCoverage.saveHistory('./coverage-history.json')
+  apiCoverage.saveHistory()
 
-  apiCoverage.generateReport('./coverage-report.json', './coverage-history.json')
+  apiCoverage.generateReport()
 }
 ```
 
@@ -206,19 +230,19 @@ async function testApi() {
 
 ```javascript
 // Save coverage history to a file
-apiCoverage.saveHistory('./coverage-history.json');
+apiCoverage.saveHistory();
 
-// Generate a report from history
-apiCoverage.generateReport('./coverage-report.json', './coverage-history.json');
+// Generate a final html and json reports from history
+apiCoverage.generateReport();
 ```
 
 ### Coverage Calculation Types
 
 The library supports two types of coverage calculation:
 
-#### Simple Coverage (default)
+#### Basic Coverage (default)
 
-In simple coverage mode, an endpoint is considered fully covered (100%) if it has been called at least once, regardless of status codes or query parameters. This is the default behavior and is useful for basic coverage tracking.
+In basic coverage mode, an endpoint is considered fully covered (100%) if it has been called at least once, regardless of status codes or query parameters. This is the default behavior and is useful for basic coverage tracking.
 
 ```javascript
 // Use basic coverage (default) other option - "detailed"
@@ -298,18 +322,13 @@ Get coverage statistics.
 
 - Returns: Object containing coverage statistics
 
-### `saveHistory(filePath)`
+### `saveHistory()`
 
 Save current coverage state to a history file.
 
-- `filePath`: File path to save coverage data
-
-### `generateReport(outputPath, historyPath)`
+### `generateReport()`
 
 Generate coverage report from history file.
-
-- `outputPath`: Where to save final report
-- `historyPath`: Where to read saved coverage history
 
 ### `resetCoverage()`
 

@@ -1,3 +1,4 @@
+//new
 import SwaggerParser from '@apidevtools/swagger-parser'
 import axios from 'axios'
 import fs from 'fs'
@@ -50,7 +51,10 @@ export class ApiCoverage {
     this.coverageType = 'basic'
     this.config = config
     this.TEMPLATE_PATH = path.resolve(__dirname, './templates/index.html')
+    this.JSON_REPORT_PATH = config['json-report-path']
+    this.JSON_REPORT_HISTORY_PATH = config['json-report-history-path']
     this.REPORT_PATH = config['html-report-path']
+    this.STATS_PATH = config['stats-path']
   }
 
   /**
@@ -97,7 +101,7 @@ export class ApiCoverage {
         const resolvedPath = path.resolve(source)
         this.apiSpec = await SwaggerParser.validate(resolvedPath)
       }
-      this._parseEndpoints()
+      this.#parseEndpoints()
 
       // Handle both OpenAPI 2.0 (Swagger) and OpenAPI 3.0+ specs
       // @ts-ignore - We know these properties exist in OpenAPI specs
@@ -120,10 +124,9 @@ export class ApiCoverage {
 
   /**
    * Parse the API specification to extract all endpoints
-   * @private
    * @description Extracts all endpoints from the OpenAPI spec and stores them in the endpoints Map
    */
-  _parseEndpoints() {
+  #parseEndpoints() {
     if (this.endpoints.size > 0) return
     const { paths } = this.apiSpec
     for (const path in paths) {
@@ -137,7 +140,7 @@ export class ApiCoverage {
             operation: pathItem[method],
             covered: false,
             // Create a regex pattern for this path
-            pathRegex: this._createPathRegex(path)
+            pathRegex: this.#createPathRegex(path)
           }
 
           const key = `${endpoint.path} ${endpoint.method}`
@@ -157,12 +160,11 @@ export class ApiCoverage {
    * Create a regex pattern for matching an OpenAPI path
    * @param {string} pathTemplate - OpenAPI path template (e.g., /pet/{petId})
    * @returns {RegExp} - Regular expression for matching this path
-   * @private
    * @example
    * // Returns regex for matching /pet/123
    * _createPathRegex('/pet/{petId}')
    */
-  _createPathRegex(pathTemplate) {
+  #createPathRegex(pathTemplate) {
     let pattern = pathTemplate.replace(/[.*+?^${}()[\]\\]/g, match => (match === '{' || match === '}' ? match : '\\' + match))
 
     // Replace {paramName} with a regex that matches any path segment(s)
@@ -211,13 +213,13 @@ export class ApiCoverage {
 
     switch (options.clientType.toLowerCase()) {
       case 'playwright':
-        this._patchPlaywright(client)
+        this.#patchPlaywright(client)
         break
       case 'axios':
-        this._patchAxios(client)
+        this.#patchAxios(client)
         break
       case 'fetch':
-        this._patchFetch(client)
+        this.#patchFetch(client)
         break
       default:
         throw new Error(`Unsupported client type: ${options.clientType}`)
@@ -229,10 +231,10 @@ export class ApiCoverage {
   /**
    * Patch Playwright's APIRequestContext
    * @param {import('@playwright/test').APIRequestContext} request - Playwright APIRequestContext
-   * @private
    * @description Patches Playwright's request methods to track API coverage
    */
-  _patchPlaywright(request) {
+  #patchPlaywright(request) {
+    this.playwright = true
     // Store original methods for later restoration
     this.originalRequest = {}
     const methodsToTrack = ['get', 'post', 'put', 'delete', 'patch', 'head', 'options']
@@ -275,7 +277,7 @@ export class ApiCoverage {
             }
 
             this.log(`Tracking request: ${method.toUpperCase()} ${pathname}`)
-            this._markEndpointCovered(method.toUpperCase(), pathname, response.status(), queryParams)
+            this.#markEndpointCovered(method.toUpperCase(), pathname, response.status(), queryParams)
           } catch (error) {
             console.warn(`Failed to track request: ${method} ${url}`, error)
           }
@@ -289,10 +291,10 @@ export class ApiCoverage {
   /**
    * Patch Axios instance
    * @param {import('axios').AxiosInstance} axiosInstance - Axios instance
-   * @private
    * @description Patches Axios instance methods to track API coverage
    */
-  _patchAxios(axiosInstance) {
+  #patchAxios(axiosInstance) {
+    this.axios = true
     this.log('Patching Axios instance')
 
     // Store original methods for later restoration
@@ -339,7 +341,7 @@ export class ApiCoverage {
         }
 
         this.log(`Tracking Axios request: ${method} ${pathname}`)
-        const result = this._markEndpointCovered(method, pathname, response.status, queryParams)
+        const result = this.#markEndpointCovered(method, pathname, response.status, queryParams)
         this.log(`Endpoint coverage result: ${result}`)
       } catch (error) {
         console.warn(`Failed to track Axios request: ${config.method} ${config.url}`, error)
@@ -390,7 +392,7 @@ export class ApiCoverage {
             }
 
             this.log(`Tracking Axios ${method}: ${method.toUpperCase()} ${pathname}`)
-            const result = this._markEndpointCovered(method.toUpperCase(), pathname, response.status, queryParams)
+            const result = this.#markEndpointCovered(method.toUpperCase(), pathname, response.status, queryParams)
             this.log(`Endpoint coverage result: ${result}`)
           } catch (error) {
             console.warn(`Failed to track Axios ${method}: ${method} ${url}`, error)
@@ -407,10 +409,10 @@ export class ApiCoverage {
   /**
    * Patch global fetch function
    * @param {Function} fetchFn - Global fetch function
-   * @private
    * @description Patches global fetch function to track API coverage
    */
-  _patchFetch(fetchFn) {
+  #patchFetch(fetchFn) {
+    this.fetch = true
     // Store original fetch for later restoration
     this.originalRequest = {
       fetch: fetchFn
@@ -454,7 +456,7 @@ export class ApiCoverage {
         }
 
         this.log(`Tracking request: ${method} ${pathname}`)
-        this._markEndpointCovered(method, pathname, response.status, queryParams)
+        this.#markEndpointCovered(method, pathname, response.status, queryParams)
       } catch (error) {
         console.warn(`Failed to track request: ${init?.method || 'GET'} ${input}`, error)
       }
@@ -470,9 +472,8 @@ export class ApiCoverage {
    * @param {number} statusCode - HTTP status code
    * @param {Object} [queryParams={}] - Query parameters used in the request
    * @returns {boolean} - Whether the endpoint was successfully marked as covered
-   * @private
    */
-  _markEndpointCovered(method, path, statusCode, queryParams = {}) {
+  #markEndpointCovered(method, path, statusCode, queryParams = {}) {
     this.log(`Marking endpoint as covered: ${method} ${path} (status: ${statusCode})`)
 
     // Create a copy of the path to avoid modifying the parameter
@@ -563,7 +564,7 @@ export class ApiCoverage {
   registerRequest(method, path, response, queryParams = {}) {
     this.log(`Manually registering: ${method} ${path}`)
     const statusCode = typeof response.status === 'function' ? response.status() : response.status
-    return this._markEndpointCovered(method.toUpperCase(), path, statusCode, queryParams)
+    return this.#markEndpointCovered(method.toUpperCase(), path, statusCode, queryParams)
   }
 
   /**
@@ -661,7 +662,7 @@ export class ApiCoverage {
       covered,
       percentage: percentage,
       coveredDetails: details,
-      uncoveredEndpoints: this._getUncoveredEndpoints()
+      uncoveredEndpoints: this.#getUncoveredEndpoints()
     }
   }
 
@@ -671,9 +672,8 @@ export class ApiCoverage {
    * @property {string} path - Endpoint path
    * @property {string} method - HTTP method
    * @property {string} operationId - Operation ID from OpenAPI spec
-   * @private
    */
-  _getUncoveredEndpoints() {
+  #getUncoveredEndpoints() {
     const uncovered = []
     for (const [key, endpoint] of this.endpoints.entries()) {
       if (!endpoint.covered) {
@@ -691,9 +691,8 @@ export class ApiCoverage {
    * Safely write a file, creating directories if they don't exist
    * @param {string} filePath - Path to the file to write
    * @param {string} content - Content to write to the file
-   * @private
-   */
-  async _safeWriteFile(filePath, content) {
+S   */
+  async #safeWriteFile(filePath, content) {
     const dir = path.dirname(filePath)
     if (!fs.existsSync(dir)) {
       await fs.promises.mkdir(dir, { recursive: true })
@@ -705,14 +704,13 @@ export class ApiCoverage {
 
   /**
    * Save current coverage state to a history file
-   * @param {string} filePath - File path to save coverage data
    * @returns {Promise<void>}
    * @throws {Error} - Throws an error if file operations fail
    * @example
-   * await apiCoverage.saveHistory('./coverage-history.json');
+   * await apiCoverage.saveHistory();
    */
-  async saveHistory(filePath) {
-    this.log(`Saving coverage history to ${filePath}`)
+  async saveHistory() {
+    this.log(`Saving coverage history to ${this.JSON_REPORT_HISTORY_PATH}`)
 
     const history = []
 
@@ -735,17 +733,17 @@ export class ApiCoverage {
 
     this.log(`Writing ${history.length} entries to history file`)
 
-    if (!fs.existsSync(filePath)) {
-      await this._safeWriteFile(filePath, JSON.stringify(history, null, 2))
+    if (!fs.existsSync(this.JSON_REPORT_HISTORY_PATH)) {
+      await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify(history, null, 2))
       this.log(`Created new history file with ${history.length} entries`)
     } else {
-      const existing = JSON.parse(await fs.promises.readFile(filePath, 'utf-8'))
-      const merged = this._mergeHistory(existing, history)
-      await this._safeWriteFile(filePath, JSON.stringify(merged, null, 2))
+      const existing = JSON.parse(await fs.promises.readFile(this.JSON_REPORT_HISTORY_PATH, 'utf-8'))
+      const merged = this.#mergeHistory(existing, history)
+      await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify(merged, null, 2))
       this.log(`Merged with existing history file, total entries: ${merged.length}`)
     }
 
-    this.log(`Coverage history saved to ${filePath}`)
+    this.log(`Coverage history saved to ${this.JSON_REPORT_HISTORY_PATH}`)
   }
 
   /**
@@ -753,9 +751,8 @@ export class ApiCoverage {
    * @param {Array<Object>} existing - Existing history data
    * @param {Array<Object>} current - Current history data
    * @returns {Array<Object>} Merged history data
-   * @private
    */
-  _mergeHistory(existing, current) {
+  #mergeHistory(existing, current) {
     const map = new Map()
 
     // First, process existing entries
@@ -794,28 +791,42 @@ export class ApiCoverage {
   }
 
   /**
-   * Generate coverage report from history file
-   * @param {string} outputPath - Where to save final report
-   * @param {string} historyPath - Where to read saved coverage history
+   * Generate coverage reports (JSON and HTML) from history file
    * @returns {Promise<Object>} Generated report object
    * @throws {Error} - Throws an error if file operations fail
    * @example
-   * await apiCoverage.generateReport('./report.json', './coverage-history.json');
+   * await apiCoverage.generateReport();
    */
-  async generateReport(outputPath, historyPath) {
-    let history = []
+  async generateReport() {
+    const history = await this.#readHistory()
+    const { covered, statusCountsMap, queryParamsMap } = this.#processHistory(history)
 
+    const { endpoints, totalCoverage, totalEndpoints } = this.#buildEndpointsData(covered, statusCountsMap, queryParamsMap)
+
+    const overallCoverage = this.#calculateOverallCoverage(totalCoverage, totalEndpoints)
+    const report = this.#buildReport(endpoints, overallCoverage)
+
+    await this.#writeReport(report)
+    await this.#mergeStats(report)
+
+    await this.#generateHtmlReport(report)
+
+    return report
+  }
+
+  async #readHistory() {
     try {
-      history = JSON.parse(await fs.promises.readFile(historyPath, 'utf-8'))
+      return JSON.parse(await fs.promises.readFile(this.JSON_REPORT_HISTORY_PATH, 'utf-8'))
     } catch (err) {
       throw new Error(`Failed to read history: ${err.message}`)
     }
+  }
 
+  #processHistory(history) {
     const covered = new Set()
     const statusCountsMap = new Map()
     const queryParamsMap = new Map()
 
-    // Process history to build coverage data
     for (const entry of history) {
       const key = `${entry.path} ${entry.method}`
       covered.add(key)
@@ -824,15 +835,12 @@ export class ApiCoverage {
         statusCountsMap.set(key, new Map())
       }
 
-      // Update status counts for this specific endpoint/method combination
       const statusMap = statusCountsMap.get(key)
       for (const [status, count] of Object.entries(entry.statuses)) {
         const statusCode = parseInt(status, 10)
-        // Use the count directly from the history entry
         statusMap.set(statusCode, count)
       }
 
-      // Track query parameters
       if (entry.queryParams && entry.queryParams.length > 0) {
         if (!queryParamsMap.has(key)) {
           queryParamsMap.set(key, new Set())
@@ -845,155 +853,149 @@ export class ApiCoverage {
       }
     }
 
-    // Build the detailed endpoints array
+    return { covered, statusCountsMap, queryParamsMap }
+  }
+
+  #buildEndpointsData(covered, statusCountsMap, queryParamsMap) {
     const endpoints = []
     let totalCoverage = 0
     let totalEndpoints = 0
 
     for (const [key, endpoint] of this.endpoints.entries()) {
-      const [path, method] = key.split(' ')
-      const endpointKey = `${path} ${method}`
-      const isCovered = covered.has(endpointKey)
+      const endpointData = this.#processEndpoint(key, endpoint, covered, statusCountsMap, queryParamsMap)
+      endpoints.push(endpointData)
 
-      // Get status codes from the API spec
-      const statusCodes = []
-      const { operation } = endpoint
-      let statusCodeCoverage = 0
-      let totalStatusCodes = 0
-
-      if (operation && operation.responses) {
-        totalStatusCodes = Object.keys(operation.responses).length
-        let coveredStatusCodes = 0
-
-        for (const [statusCode, response] of Object.entries(operation.responses)) {
-          const statusCodeNum = statusCode === 'default' ? 'default' : parseInt(statusCode, 10)
-          const statusCount = statusCountsMap.get(endpointKey)?.get(statusCodeNum) || 0
-          const isStatusCovered = statusCount > 0
-
-          if (isStatusCovered) {
-            coveredStatusCodes++
-          }
-
-          statusCodes.push({
-            value: statusCodeNum,
-            totalCases: statusCount, // This now represents the actual number of requests
-            description: response.description || 'No description',
-            responseCoverage: isStatusCovered ? 'COVERED' : 'UNCOVERED',
-            statusCodeCoverage: isStatusCovered ? 'COVERED' : 'UNCOVERED'
-          })
-        }
-
-        statusCodeCoverage = totalStatusCodes > 0 ? (coveredStatusCodes / totalStatusCodes) * 100 : 0
-      }
-
-      // Get query parameters from the API spec
-      const queryParameters = []
-      let queryParamCoverage = 0
-      let totalQueryParams = 0
-      let coveredQueryParams = 0
-
-      if (operation && operation.parameters) {
-        totalQueryParams = operation.parameters.filter(param => param.in === 'query').length
-
-        for (const param of operation.parameters) {
-          if (param.in === 'query') {
-            // Check if this parameter was used in any request
-            const isParamCovered = queryParamsMap.has(endpointKey) && queryParamsMap.get(endpointKey).has(param.name)
-
-            if (isParamCovered) {
-              coveredQueryParams++
-            }
-
-            queryParameters.push({
-              name: param.name,
-              coverage: isParamCovered ? 'COVERED' : 'UNCOVERED'
-            })
-          }
-        }
-
-        queryParamCoverage = totalQueryParams > 0 ? (coveredQueryParams / totalQueryParams) * 100 : 0
-      }
-
-      // Calculate endpoint coverage with weighted components
-      // Base coverage: 40% for just calling the endpoint
-      // Status code coverage: 40% for testing different status codes
-      // Query parameter coverage: 20% for testing query parameters
-      let endpointCoverage = 0
-      let baseCoverage = 0
-      let weightedStatusCoverage = 0
-      let weightedQueryParamCoverage = 0
-      if (this.coverageType === 'detailed') {
-        if (isCovered && totalStatusCodes > 1 && totalQueryParams > 0) {
-          baseCoverage = 40
-          weightedStatusCoverage = statusCodeCoverage * 0.4
-          weightedQueryParamCoverage = queryParamCoverage * 0.2
-          endpointCoverage = +parseFloat(baseCoverage + weightedStatusCoverage + weightedQueryParamCoverage).toFixed(1)
-        } else if (isCovered && totalStatusCodes === 1 && totalQueryParams === 0) {
-          endpointCoverage = 100
-        } else if (isCovered && totalStatusCodes === 1 && totalQueryParams > 0) {
-          baseCoverage = 60
-          weightedQueryParamCoverage = queryParamCoverage * 0.4
-          endpointCoverage = +parseFloat(baseCoverage + weightedQueryParamCoverage).toFixed(1)
-        } else if (isCovered && totalStatusCodes > 1 && totalQueryParams === 0) {
-          baseCoverage = 60
-          weightedStatusCoverage = statusCodeCoverage * 0.4
-          endpointCoverage = +parseFloat(baseCoverage + weightedStatusCoverage).toFixed(1)
-        } else {
-          endpointCoverage = 0
-        }
-      } else {
-        endpointCoverage = isCovered ? 100 : 0
-      }
-
-      this.log(`${path}${method}: baseCoverage = ${baseCoverage}`)
-      this.log(`${path}${method}: weightedStatusCoverage = ${weightedStatusCoverage}`)
-      this.log(`${path}${method}: weightedQueryParamCoverage = ${weightedQueryParamCoverage}`)
-
-      // Get coverage history
-      const coverageHistory = []
-      coverageHistory.push({
-        createdAt: new Date().toISOString(),
-        totalCoverage: endpointCoverage || 0.0
-      })
-
-      endpoints.push({
-        name: path,
-        method: method,
-        summary: operation?.summary || 'No summary',
-        coverage: isCovered ? 'COVERED' : 'UNCOVERED',
-        totalCases: statusCodes.reduce((sum, sc) => sum + (sc.totalCases || 0), 0),
-        statusCodes: statusCodes,
-        queryParameters: queryParameters,
-        requestCoverage: 'MISSING',
-        totalCoverage: endpointCoverage,
-        totalCoverageHistory: coverageHistory
-      })
-
-      totalCoverage += endpointCoverage
+      totalCoverage += endpointData.totalCoverage
       totalEndpoints++
     }
 
-    // Calculate overall coverage percentage
-    const overallCoverage = totalEndpoints > 0 ? +parseFloat(totalCoverage / totalEndpoints).toFixed(1) : 0.0
-    const services = []
-    for (const service of this.config?.services) {
-      services.push({
-        key: service?.key,
-        name: service?.name,
-        tags: service?.tags,
-        repository: service?.repository,
-        swaggerUrl: service?.swaggerUrl,
-        swaggerFile: service?.swaggerFile
-      })
+    return { endpoints, totalCoverage, totalEndpoints }
+  }
+
+  #processEndpoint(key, endpoint, covered, statusCountsMap, queryParamsMap) {
+    const [path, method] = key.split(' ')
+    const endpointKey = `${path} ${method}`
+    const isCovered = covered.has(endpointKey)
+
+    const { statusCodes, statusCodeCoverage } = this.#processStatusCodes(endpoint, endpointKey, statusCountsMap)
+    const { queryParameters, queryParamCoverage } = this.#processQueryParams(endpoint, endpointKey, queryParamsMap)
+
+    const endpointCoverage = this.#calculateEndpointCoverage(isCovered, statusCodeCoverage, queryParamCoverage, endpoint)
+
+    return {
+      name: path,
+      method,
+      summary: endpoint.operation?.summary || 'No summary',
+      coverage: isCovered ? 'COVERED' : 'UNCOVERED',
+      totalCases: statusCodes.reduce((sum, sc) => sum + (sc.totalCases || 0), 0),
+      statusCodes,
+      queryParameters,
+      requestCoverage: 'MISSING',
+      totalCoverage: endpointCoverage,
+      totalCoverageHistory: [
+        {
+          createdAt: new Date().toISOString(),
+          totalCoverage: endpointCoverage || 0.0
+        }
+      ]
     }
-    const report = {
-      config: {
-        services
-      },
+  }
+
+  #processStatusCodes(endpoint, endpointKey, statusCountsMap) {
+    const statusCodes = []
+    let statusCodeCoverage = 0
+    let totalStatusCodes = 0
+
+    if (endpoint.operation && endpoint.operation.responses) {
+      totalStatusCodes = Object.keys(endpoint.operation.responses).length
+      let coveredStatusCodes = 0
+
+      for (const [statusCode, response] of Object.entries(endpoint.operation.responses)) {
+        const statusCodeNum = statusCode === 'default' ? 'default' : parseInt(statusCode, 10)
+        const statusCount = statusCountsMap.get(endpointKey)?.get(statusCodeNum) || 0
+        const isStatusCovered = statusCount > 0
+
+        if (isStatusCovered) {
+          coveredStatusCodes++
+        }
+
+        statusCodes.push({
+          value: statusCodeNum,
+          totalCases: statusCount,
+          description: response.description || 'No description',
+          responseCoverage: isStatusCovered ? 'COVERED' : 'UNCOVERED'
+        })
+      }
+
+      statusCodeCoverage = totalStatusCodes > 0 ? (coveredStatusCodes / totalStatusCodes) * 100 : 0
+    }
+
+    return { statusCodes, statusCodeCoverage }
+  }
+
+  #processQueryParams(endpoint, endpointKey, queryParamsMap) {
+    const queryParameters = []
+    let queryParamCoverage = 0
+    let totalQueryParams = 0
+    let coveredQueryParams = 0
+
+    if (endpoint.operation && endpoint.operation.parameters) {
+      totalQueryParams = endpoint.operation.parameters.filter(param => param.in === 'query').length
+
+      for (const param of endpoint.operation.parameters) {
+        if (param.in === 'query') {
+          const isParamCovered = queryParamsMap.has(endpointKey) && queryParamsMap.get(endpointKey).has(param.name)
+
+          if (isParamCovered) {
+            coveredQueryParams++
+          }
+
+          queryParameters.push({
+            name: param.name,
+            coverage: isParamCovered ? 'COVERED' : 'UNCOVERED'
+          })
+        }
+      }
+
+      queryParamCoverage = totalQueryParams > 0 ? (coveredQueryParams / totalQueryParams) * 100 : 0
+    }
+
+    return { queryParameters, queryParamCoverage }
+  }
+
+  #calculateEndpointCoverage(isCovered, statusCodeCoverage, queryParamCoverage, endpoint) {
+    if (this.coverageType === 'detailed') {
+      if (isCovered && endpoint.operation.responses && endpoint.operation.parameters) {
+        const baseCoverage = 40
+        const weightedStatusCoverage = statusCodeCoverage * 0.4
+        const weightedQueryParamCoverage = queryParamCoverage * 0.2
+        return baseCoverage + weightedStatusCoverage + weightedQueryParamCoverage
+      }
+      return isCovered ? 100 : 0
+    }
+    return isCovered ? 100 : 0
+  }
+
+  #calculateOverallCoverage(totalCoverage, totalEndpoints) {
+    return totalEndpoints > 0 ? +parseFloat(totalCoverage / totalEndpoints).toFixed(1) : 0.0
+  }
+
+  #buildReport(endpoints, overallCoverage) {
+    const services = this.config?.services.map(service => ({
+      key: service?.key,
+      name: service?.name,
+      tags: service?.tags,
+      repository: service?.repository,
+      swaggerUrl: service?.swaggerUrl,
+      swaggerFile: service?.swaggerFile
+    }))
+
+    return {
+      config: { services },
       createdAt: new Date().toISOString(),
       servicesCoverage: {
         [this.config?.services[0]?.key]: {
-          endpoints: endpoints,
+          endpoints,
           totalCoverage: overallCoverage,
           totalCoverageHistory: [
             {
@@ -1004,9 +1006,31 @@ export class ApiCoverage {
         }
       }
     }
-    await this._safeWriteFile(outputPath, JSON.stringify(report, null, 2))
-    this.log(`Final report written to ${outputPath}`)
+  }
 
+  async #writeReport(report) {
+    return await this.#safeWriteFile(this.JSON_REPORT_PATH, JSON.stringify(report, null, 2))
+  }
+
+  async #mergeStats(report) {
+    try {
+      const reportStats = report.servicesCoverage[this.config?.services[0]?.key].totalCoverageHistory
+      if (!fs.existsSync(this.STATS_PATH)) {
+        return this.#safeWriteFile(this.STATS_PATH, JSON.stringify(reportStats, null, 2))
+      } else {
+        const stats = JSON.parse(await fs.promises.readFile(this.STATS_PATH, 'utf-8'))
+        !this.playwright && (report.servicesCoverage[this.config?.services[0]?.key].totalCoverageHistory = [...stats, ...reportStats])
+        return this.#safeWriteFile(
+          this.STATS_PATH,
+          JSON.stringify(report.servicesCoverage[this.config?.services[0]?.key].totalCoverageHistory, null, 2)
+        )
+      }
+    } catch (err) {
+      throw new Error('ERROR adding previous run stats ' + err.message)
+    }
+  }
+
+  async #generateHtmlReport(report) {
     try {
       await fs.promises.cp(this.TEMPLATE_PATH, this.REPORT_PATH, { recursive: true })
       let html = await fs.promises.readFile(this.REPORT_PATH, 'utf-8')
@@ -1014,11 +1038,11 @@ export class ApiCoverage {
         /<script id="state" type="application\/json">[\s\S]*?<\/script>/,
         `<script id="state" type="application/json">${JSON.stringify(report, null, 2)}</script>`
       )
-      await this._safeWriteFile(this.REPORT_PATH, html)
+      !this.playwright && (await fs.promises.unlink(this.JSON_REPORT_HISTORY_PATH))
+      return this.#safeWriteFile(this.REPORT_PATH, html)
     } catch (err) {
       throw new Error('ERROR copying template HTML file ' + err.message)
     }
-    return report
   }
 
   /**

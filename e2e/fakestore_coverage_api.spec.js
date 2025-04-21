@@ -2,8 +2,6 @@
 import { expect, test } from '@playwright/test'
 import { ApiCoverage } from 'api-coverage-tracker'
 import config from '../config.json' with { type: 'json' }
-const HISTORY_PATH = './coverage/coverage-history.json'
-const FINAL_REPORT = './coverage/coverage-report.json'
 const apiCoverage = new ApiCoverage(config)
 await apiCoverage.loadSpec('https://fakestoreapi.com/fakestoreapi.json')
 apiCoverage.setDebug(false)
@@ -13,11 +11,11 @@ test.beforeEach(async ({ request }) => {
 })
 
 test.afterEach(async ({ request }) => {
-  await apiCoverage.saveHistory(HISTORY_PATH)
+  await apiCoverage.saveHistory()
   apiCoverage.stopTracking(request)
 })
 test.afterAll(async () => {
-  await apiCoverage.generateReport(FINAL_REPORT, HISTORY_PATH)
+  await apiCoverage.generateReport()
 })
 test.describe.configure({ mode: 'default' })
 test.describe('FakeStore API Tests', () => {

@@ -9,8 +9,6 @@ const apiCoverage = new ApiCoverage(config)
 // Example 1: Using with Playwright - refer to e2e directory playwright spec file
 
 // Example 2: Using with Axios
-const historyPath = './coverage/coverage-history.json'
-const finalReport = './coverage/coverage-report.json'
 async function exampleWithAxios() {
   try {
     // Load the API specification - use the correct path to your swagger file
@@ -56,9 +54,9 @@ async function exampleWithAxios() {
     console.log('Axios tracking stopped')
 
     // Save coverage history
-    await apiCoverage.saveHistory(historyPath)
+    await apiCoverage.saveHistory()
     // Generate a report
-    await apiCoverage.generateReport(finalReport, historyPath)
+    await apiCoverage.generateReport()
   } catch (error) {
     console.error('Error in Axios example:', error)
   }
@@ -92,10 +90,10 @@ async function exampleWithFetch() {
     const stats = apiCoverage.getCoverageStats()
     console.log('Coverage stats:', stats)
     // Save coverage history
-    await apiCoverage.saveHistory(historyPath)
+    await apiCoverage.saveHistory()
 
     // Generate a report
-    await apiCoverage.generateReport(finalReport, historyPath)
+    await apiCoverage.generateReport()
   }
 }
 
@@ -114,10 +112,10 @@ async function exampleManualRegistration() {
   const stats = apiCoverage.getCoverageStats()
   console.log('Coverage stats:', stats)
   // Save coverage history
-  await apiCoverage.saveHistory(historyPath)
+  await apiCoverage.saveHistory()
 
   // Generate a report
-  await apiCoverage.generateReport(finalReport, historyPath)
+  await apiCoverage.generateReport()
 }
 
 // Run the examples

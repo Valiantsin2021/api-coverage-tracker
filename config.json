@@ -12,5 +12,8 @@
       "swaggerFile": null
     }
   ],
-  "html-report-path": "./reports/index.html"
+  "json-report-path": "./reports/report.json",
+  "json-report-history-path": "./reports/history.json",
+  "html-report-path": "./reports/index.html",
+  "stats-path": "./reports/stats.json"
 }
