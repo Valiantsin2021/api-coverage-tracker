@@ -710,6 +710,9 @@ S   */
    * await apiCoverage.saveHistory();
    */
   async saveHistory() {
+    if (!this.JSON_REPORT_HISTORY_PATH) {
+      throw new Error('JSON report history path is not set in config.json')
+    }
     this.log(`Saving coverage history to ${this.JSON_REPORT_HISTORY_PATH}`)
 
     const history = []
@@ -798,6 +801,9 @@ S   */
    * await apiCoverage.generateReport();
    */
   async generateReport() {
+    if (!this.JSON_REPORT_HISTORY_PATH || !this.JSON_REPORT_PATH || !this.REPORT_PATH || !this.STATS_PATH) {
+      throw new Error('Paths to coverage reports are not set in config.json')
+    }
     const history = await this.#readHistory()
     const { covered, statusCountsMap, queryParamsMap } = this.#processHistory(history)
 
