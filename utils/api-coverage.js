@@ -165,8 +165,8 @@ export class ApiCoverage {
   #createPathRegex(pathTemplate) {
     let pattern = pathTemplate.replace(/[.*+?^${}()[\]\\]/g, match => (match === '{' || match === '}' ? match : '\\' + match))
 
-    // Replace {paramName} with a regex that matches any path segment(s)
-    pattern = pattern.replace(/\{[^/{}]+\}/g, '([^/]+(?:/[^/]+)*)')
+    // Replace {paramName} with a regex that matches single path segment(s)
+    pattern = pattern.replace(/\{[^/{}]+\}/g, '([^/]+)') // '([^/]+(?:/[^/]+)*)' - multimple path segments
 
     const segments = pattern.split('/').filter(Boolean)
 
