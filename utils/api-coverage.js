@@ -1,6 +1,5 @@
 //new
 import SwaggerParser from '@apidevtools/swagger-parser'
-import axios from 'axios'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -95,8 +94,7 @@ export class ApiCoverage {
     try {
       const urlRegex = /^https?:\/\//
       if (urlRegex.test(source)) {
-        const response = await axios.get(source)
-        this.apiSpec = await SwaggerParser.validate(response.data)
+        this.apiSpec = await SwaggerParser.validate(source)
       } else {
         const resolvedPath = path.resolve(source)
         this.apiSpec = await SwaggerParser.validate(resolvedPath)
