@@ -226,6 +226,59 @@ async function testApi() {
 }
 ```
 
+### Cypress example:
+
+```javascript
+// cypress.config.js
+
+setupNodeEvents(on, config) {
+    
+  // Task to register an API request
+  registerApiRequest({ method, url, response }) {
+    apiCoverage.registerRequest(method, url, response)
+    return null
+  },
+
+  // Task to save API history
+  saveApiHistory() {
+    return apiCoverage.saveHistory().then(() => null)
+  },
+  // Task to generate the API coverage report
+  generateApiReport() {
+    return apiCoverage.generateReport().then(() => {
+      console.log('API coverage report generated')
+      return null
+    })
+  },
+}
+
+// Hooks
+
+before(() => {
+  cy.task('loadApiSpec', './automation-excersize-spec.json').then(() => {
+    Cypress.log({ name: 'API Coverage', message: 'Spec loaded successfully' })
+  })
+})
+afterEach(() => {
+  cy.task('saveApiHistory')
+})
+after(() => {
+  cy.task('generateApiReport').then(() => {
+    Cypress.log({ name: 'API Coverage', message: 'Report generated' })
+  })
+})
+
+// test
+
+it('API coverage test', () => {
+  cy.api({ url: productsList })
+  .then(response => {
+    cy.registerApiRequest('GET', '/api/productsList', response)
+    const body = JSON.parse(response.body)
+    expect(body['products'], 'Assert body["products"] is array').to.be.an('array')      
+  })
+})
+```
 ### Saving and Loading Coverage History
 
 ```javascript

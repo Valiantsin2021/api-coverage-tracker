@@ -1,6 +1,6 @@
 {
   "name": "api-coverage-tracker",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A universal library for tracking API coverage against OpenAPI/Swagger specifications from URL or local file. Supports Axis, Fetch, Playwright and manual registry of the responses",
   "main": "utils/api-coverage.js",
   "exports": {
