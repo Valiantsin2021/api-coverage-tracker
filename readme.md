@@ -11,8 +11,12 @@
    <a href="https://GitHub.com/Valiantsin2021/api-coverage-tracker/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="api-coverage-tracker is maintained" /></a>
    <a href="https://github.com/Valiantsin2021/api-coverage-tracker"><img src="https://img.shields.io/badge/Author-Valentin%20Lutchanka-blue" alt="api-coverage-tracker author" /></a>
    <a href="https://github.com/Valiantsin2021/api-coverage-tracker/actions/workflows/ci.yml"><img src="https://github.com/Valiantsin2021/api-coverage-tracker/actions/workflows/playwright.yml/badge.svg?branch=main" alt="api-coverage-tracker ci tests" /></a>
-</p>
-<h3 align="center">A universal library for tracking API coverage against OpenAPI/Swagger specifications. This library can work with various HTTP clients including Playwright, Axios, Fetch, and more (via register of the response in the exposed method).</h3>
+  <a href="https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=white"><img src="https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=white" alt="postman" /></a>
+  <a href="https://img.shields.io/badge/OpenAPI-5392CE?logo=openapi&logoColor=white"><img src="https://img.shields.io/badge/OpenAPI-5392CE?logo=openapi&logoColor=white" alt="openapi" /></a>
+  <a href="https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=white"><img src="https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=white" alt="swagger" /></a>
+  </p>  
+  <h3 align="center">A universal library for tracking API coverage against OpenAPI/Swagger specifications. This library can work with various HTTP clients including Playwright, Axios, Fetch, and more (via register of the response in the exposed method).</h3>
+
 
 Acknoledgements to Nikita Filonov for Idea and great standalone HTML report file- https://github.com/Nikita-Filonov
 
@@ -24,6 +28,8 @@ For Axios and Fetch clients, it also tracks the previous coverage statistics.
 
 For Playwright due to specifics of Playwright workers spawn logics this functionality is not available at the moment.
 
+For Postman collections it also tracks the previous coverage statistics.
+
 ## Features
 
 - Automated HTML report generation
@@ -32,11 +38,13 @@ For Playwright due to specifics of Playwright workers spawn logics this function
 - Generate coverage reports showing which endpoints are covered
 - Support for both OpenAPI 2.0 (Swagger) and OpenAPI 3.0+ specifications
 - Saves and reflects in report the history of coverage changes
+- Basic and detailed levels of coverage calculation
 - Compatible with multiple HTTP clients:
   - Playwright
   - Axios
   - Fetch
   - Custom HTTP clients (via manual registration)
+  - Postman collections coverage calculation agains openAPI specification
 
 ## Important changes between 1.0.4 and 1.1.0 versions:
 
@@ -279,6 +287,23 @@ it('API coverage test', () => {
   })
 })
 ```
+
+### Postman example:
+
+```javascript
+import config from '../config.json' with { type: 'json' }
+import { ApiCoverage } from 'api-coverage-tracker'
+
+const apiCoverage = new ApiCoverage(config)
+const openAPISpec = 'https://fakestoreapi.com/fakestoreapi.json'
+const collectionPath = './e2e/data/FakeStoreAPI.postman_collection.json'
+await apiCoverage.loadSpec(openAPISpec)
+apiCoverage.registerPostmanRequests({ collectionPath, coverage: 'basic' })
+await apiCoverage.saveHistory()
+await apiCoverage.generateReport()
+
+```
+
 ### Saving and Loading Coverage History
 
 ```javascript

@@ -65,7 +65,7 @@ async function exampleWithAxios() {
 // Example 3: Using with Fetch
 async function exampleWithFetch() {
   // Load the API specification
-  await apiCoverage.loadSpec('./apispec.json')
+  await apiCoverage.loadSpec('./e2e/data/apispec.json')
 
   // Start tracking Fetch requests
   apiCoverage.startTracking(global.fetch, { clientType: 'fetch', coverage: 'detailed' })
@@ -100,7 +100,7 @@ async function exampleWithFetch() {
 // Example 4: Manually registering requests
 async function exampleManualRegistration() {
   // Load the API specification
-  await apiCoverage.loadSpec('./apispec.json')
+  await apiCoverage.loadSpec('./e2e/dataapispec.json')
 
   // Make a request using any method
   const response = await fetch('https://petstore.swagger.io/v2/pet/1')

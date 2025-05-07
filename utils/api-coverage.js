@@ -3,6 +3,7 @@ import SwaggerParser from '@apidevtools/swagger-parser'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { parser } from './postman-coverage.js'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -555,14 +556,41 @@ export class ApiCoverage {
    * @param {string} path - Request path (/api/users, etc.)
    * @param {Object} response - Response object with status() or status property
    * @param {Object} [queryParams={}] - Query parameters used in the request
+   * @param {string} [coverage='basic'] - Coverage type ('basic', 'detailed')
    * @returns {boolean} - Whether the registration was successful
    * @example
    * apiCoverage.registerRequest('GET', '/api/users', { status: 200 }, { page: 1 });
    */
-  registerRequest(method, path, response, queryParams = {}) {
+  registerRequest(method, path, response, queryParams = {}, coverage = 'basic') {
+    this.coverageType = coverage
     this.log(`Manually registering: ${method} ${path}`)
     const statusCode = typeof response.status === 'function' ? response.status() : response.status
     return this.#markEndpointCovered(method.toUpperCase(), path, statusCode, queryParams)
+  }
+  /**
+   * Register requests from a Postman collection
+   * @param {Object} params - Configuration options
+   * @param {string} params.collectionPath - Path to Postman collection file
+   * @param {string} params.coverage - Coverage type ('basic', 'detailed')
+   * @returns {void}
+   * @example
+   * apiCoverage.registerPostmanRequests('./collection.json', 'detailed');
+   */
+  registerPostmanRequests(params = { collectionPath: '', coverage: 'basic' }) {
+    const { collectionPath, coverage } = params
+    this.log(`Registering requests from Postman collection: ${collectionPath}`)
+    const options = {
+      postmanCollection: collectionPath,
+      apiCoverage: this,
+      coverage: coverage
+    }
+
+    try {
+      parser.registerRequests(options)
+      this.log('Successfully registered Postman collection requests')
+    } catch (error) {
+      throw new Error(`Failed to register Postman requests: ${error.message}`)
+    }
   }
 
   /**
