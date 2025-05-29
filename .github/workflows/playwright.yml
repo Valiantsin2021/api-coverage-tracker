@@ -27,6 +27,12 @@ jobs:
         path: reports/index.html
         retention-days: 30
         if-no-files-found: ignore
+    - name: Deploy report to Github Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./reports/index.html
     - name: Semantic Release 🚀
       uses: cycjimmy/semantic-release-action@v4
       with:

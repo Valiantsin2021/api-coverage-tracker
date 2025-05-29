@@ -28,6 +28,8 @@ For Axios and Fetch clients, it also tracks the previous coverage statistics.
 
 For Postman collections it also tracks the previous coverage statistics.
 
+## [Coverage Report sample](https://valiantsin2021.github.io/api-coverage-tracker)
+
 ## Features
 
 - Automated HTML report generation
