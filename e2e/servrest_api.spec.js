@@ -117,7 +117,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data.message).toBe('Este email já está sendo usado')
     })
 
-    test.skip('GET /usuarios/{id} - get user by ID', async ({ request }) => {
+    test('GET /usuarios/{id} - get user by ID', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/usuarios/${userId}`)
       expect.soft(response.status()).toBe(200)
 
@@ -128,7 +128,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data._id).toBe(userId)
     })
 
-    test.skip('GET /usuarios/{id} - user not found', async ({ request }) => {
+    test('GET /usuarios/{id} - user not found', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/usuarios/invalidid123`)
       expect.soft(response.status()).toBe(400)
 
@@ -136,7 +136,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data.id).toBe('id deve ter exatamente 16 caracteres alfanuméricos')
     })
 
-    test.skip('PUT /usuarios/{id} - update user', async ({ request }) => {
+    test('PUT /usuarios/{id} - update user', async ({ request }) => {
       const updatedUser = {
         nome: 'Updated Test User',
         email: `updated${Date.now()}@qa.com`,
@@ -153,7 +153,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data.message).toBe('Registro alterado com sucesso')
     })
 
-    test.skip('DELETE /usuarios/{id} - delete user', async ({ request }) => {
+    test('DELETE /usuarios/{id} - delete user', async ({ request }) => {
       const response = await request.delete(`${BASE_URL}/usuarios/${userId}`)
       expect.soft(response.status()).toBe(200)
 

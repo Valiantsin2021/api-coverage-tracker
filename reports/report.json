@@ -36,7 +36,7 @@
       }
     ]
   },
-  "createdAt": "2025-05-29T05:34:54.487Z",
+  "createdAt": "2025-05-29T19:55:41.079Z",
   "servicesCoverage": {
     "Fakestore-api-service": {
       "endpoints": [
@@ -574,7 +574,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.485Z",
+              "createdAt": "2025-05-29T19:55:41.078Z",
               "totalCoverage": 80
             }
           ]
@@ -619,7 +619,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 80
             }
           ]
@@ -649,7 +649,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 80
             }
           ]
@@ -658,29 +658,29 @@
           "name": "/usuarios/{_id}",
           "method": "GET",
           "summary": "Buscar usuário por ID",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 2,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Usuário encontrado",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Usuário não encontrado",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             }
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-29T19:55:41.079Z",
+              "totalCoverage": 80
             }
           ]
         },
@@ -688,14 +688,14 @@
           "name": "/usuarios/{_id}",
           "method": "DELETE",
           "summary": "Excluir usuário",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Registro excluído com sucesso | Nenhum registro excluído",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -706,11 +706,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 60,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-29T19:55:41.079Z",
+              "totalCoverage": 60
             }
           ]
         },
@@ -718,14 +718,14 @@
           "name": "/usuarios/{_id}",
           "method": "PUT",
           "summary": "Editar usuário",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Alterado com sucesso",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 201,
@@ -742,11 +742,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 53.33333333333333,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-29T19:55:41.079Z",
+              "totalCoverage": 53.33333333333333
             }
           ]
         },
@@ -790,7 +790,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -832,7 +832,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -862,7 +862,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -904,7 +904,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -952,7 +952,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -993,7 +993,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -1029,7 +1029,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -1059,7 +1059,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -1089,7 +1089,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
@@ -1119,13 +1119,13 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T05:34:54.486Z",
+              "createdAt": "2025-05-29T19:55:41.079Z",
               "totalCoverage": 0
             }
           ]
         }
       ],
-      "totalCoverage": 15,
+      "totalCoverage": 27.1,
       "totalCoverageHistory": [
         {
           "createdAt": "2025-05-28T22:10:57.173Z",
@@ -1142,6 +1142,22 @@
         {
           "createdAt": "2025-05-29T05:34:54.486Z",
           "totalCoverage": 15
+        },
+        {
+          "createdAt": "2025-05-29T19:03:23.553Z",
+          "totalCoverage": 18.8
+        },
+        {
+          "createdAt": "2025-05-29T19:03:58.291Z",
+          "totalCoverage": 20
+        },
+        {
+          "createdAt": "2025-05-29T19:55:20.320Z",
+          "totalCoverage": 23.3
+        },
+        {
+          "createdAt": "2025-05-29T19:55:41.079Z",
+          "totalCoverage": 27.1
         }
       ]
     }
