@@ -26,8 +26,6 @@ It calculates the API testing coverage based on the endpoints, status codes per 
 
 For Axios and Fetch clients, it also tracks the previous coverage statistics.
 
-For Playwright due to specifics of Playwright workers spawn logics this functionality is not available at the moment.
-
 For Postman collections it also tracks the previous coverage statistics.
 
 ## Features

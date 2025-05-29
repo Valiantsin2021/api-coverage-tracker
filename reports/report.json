@@ -1,0 +1,1149 @@
+{
+  "config": {
+    "services": [
+      {
+        "key": "Fakestore-api-service",
+        "name": "FakeStore API",
+        "tags": [
+          "API",
+          "COVERAGE"
+        ],
+        "repository": "",
+        "swaggerUrl": "https://fakestoreapi.com/fakestoreapi.json",
+        "swaggerFile": ""
+      },
+      {
+        "key": "Pets-playwright-api-service",
+        "name": "Pets API",
+        "tags": [
+          "API",
+          "COVERAGE"
+        ],
+        "repository": "",
+        "swaggerUrl": "https://petstore.swagger.io/v2/swagger.json",
+        "swaggerFile": ""
+      },
+      {
+        "key": "ServeRest-api-service",
+        "name": "ServeRest API",
+        "tags": [
+          "API",
+          "COVERAGE"
+        ],
+        "repository": "",
+        "swaggerUrl": "https://raw.githubusercontent.com/ServeRest/ServeRest/trunk/docs/swagger.json",
+        "swaggerFile": ""
+      }
+    ]
+  },
+  "createdAt": "2025-05-29T05:34:54.487Z",
+  "servicesCoverage": {
+    "Fakestore-api-service": {
+      "endpoints": [
+        {
+          "name": "/products",
+          "method": "GET",
+          "summary": "Get all products",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "Success",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.544Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/products",
+          "method": "POST",
+          "summary": "Add a new product",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 201,
+              "totalCases": 0,
+              "description": "Product created successfully",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/products/{id}",
+          "method": "GET",
+          "summary": "Get a single product",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "Success",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/products/{id}",
+          "method": "PUT",
+          "summary": "Update a product",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "Product updated successfully",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/products/{id}",
+          "method": "DELETE",
+          "summary": "Delete a product",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "Product deleted successfully",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/carts",
+          "method": "GET",
+          "summary": "Get all carts",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Success",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carts",
+          "method": "POST",
+          "summary": "Add a new cart",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 201,
+              "totalCases": 0,
+              "description": "Cart created successfully",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carts/{id}",
+          "method": "GET",
+          "summary": "Get a single cart",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Success",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carts/{id}",
+          "method": "PUT",
+          "summary": "Update a cart",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Cart updated successfully",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carts/{id}",
+          "method": "DELETE",
+          "summary": "Delete a cart",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Cart deleted successfully",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/users",
+          "method": "GET",
+          "summary": "Get all users",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Success",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/users",
+          "method": "POST",
+          "summary": "Add a new user",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 201,
+              "totalCases": 0,
+              "description": "User created successfully",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/users/{id}",
+          "method": "GET",
+          "summary": "Get a single user",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Success",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/users/{id}",
+          "method": "PUT",
+          "summary": "Update a user",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "User updated successfully",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/users/{id}",
+          "method": "DELETE",
+          "summary": "Delete a user",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "User deleted successfully",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/auth/login",
+          "method": "POST",
+          "summary": "Login",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Login successful",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Bad request",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-28T22:10:51.545Z",
+              "totalCoverage": 0
+            }
+          ]
+        }
+      ],
+      "totalCoverage": 31.3,
+      "totalCoverageHistory": [
+        {
+          "createdAt": "2025-05-28T22:10:47.909Z",
+          "totalCoverage": 31.3
+        },
+        {
+          "createdAt": "2025-05-28T22:10:49.791Z",
+          "totalCoverage": 31.3
+        },
+        {
+          "createdAt": "2025-05-28T22:10:51.545Z",
+          "totalCoverage": 31.3
+        }
+      ]
+    },
+    "Pets-playwright-api-service": {
+      "endpoints": [],
+      "totalCoverage": 0,
+      "totalCoverageHistory": [
+        {
+          "createdAt": "2025-05-28T22:10:47.909Z",
+          "totalCoverage": 0
+        }
+      ]
+    },
+    "ServeRest-api-service": {
+      "endpoints": [
+        {
+          "name": "/login",
+          "method": "POST",
+          "summary": "Realizar login",
+          "coverage": "COVERED",
+          "totalCases": 2,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "Login realizado com sucesso",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 401,
+              "totalCases": 1,
+              "description": "E-mail e/ou senha inválidos",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 80,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.485Z",
+              "totalCoverage": 80
+            }
+          ]
+        },
+        {
+          "name": "/usuarios",
+          "method": "GET",
+          "summary": "Listar usuários cadastrados",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "Lista de usuários",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "_id",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "nome",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "email",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "password",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "administrador",
+              "coverage": "UNCOVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 80,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 80
+            }
+          ]
+        },
+        {
+          "name": "/usuarios",
+          "method": "POST",
+          "summary": "Cadastrar usuário",
+          "coverage": "COVERED",
+          "totalCases": 3,
+          "statusCodes": [
+            {
+              "value": 201,
+              "totalCases": 2,
+              "description": "Cadastro com sucesso",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 1,
+              "description": "E-mail já cadastrado",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 80,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 80
+            }
+          ]
+        },
+        {
+          "name": "/usuarios/{_id}",
+          "method": "GET",
+          "summary": "Buscar usuário por ID",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Usuário encontrado",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Usuário não encontrado",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/usuarios/{_id}",
+          "method": "DELETE",
+          "summary": "Excluir usuário",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Registro excluído com sucesso | Nenhum registro excluído",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Usuário com carrinho cadastrado",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/usuarios/{_id}",
+          "method": "PUT",
+          "summary": "Editar usuário",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Alterado com sucesso",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 201,
+              "totalCases": 0,
+              "description": "Cadastro com sucesso",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "E-mail já cadastrado",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/produtos",
+          "method": "GET",
+          "summary": "Listar produtos cadastrados",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Lista de produtos",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "_id",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "nome",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "preco",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "descricao",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "quantidade",
+              "coverage": "UNCOVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/produtos",
+          "method": "POST",
+          "summary": "Cadastrar produto",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 201,
+              "totalCases": 0,
+              "description": "Cadastro com sucesso",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Já existe produto com esse nome",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 401,
+              "totalCases": 0,
+              "description": "Token ausente, inválido ou expirado",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 403,
+              "totalCases": 0,
+              "description": "Rota exclusiva para administradores (`administrador = true`)",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/produtos/{_id}",
+          "method": "GET",
+          "summary": "Buscar produto por ID",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Produto encontrado",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Produto não encontrado",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/produtos/{_id}",
+          "method": "DELETE",
+          "summary": "Excluir produto",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Registro excluído com sucesso | Nenhum registro excluído",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Produto faz parte de carrinho",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 401,
+              "totalCases": 0,
+              "description": "Token ausente, inválido ou expirado",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 403,
+              "totalCases": 0,
+              "description": "Rota exclusiva para administradores (`administrador = true`)",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/produtos/{_id}",
+          "method": "PUT",
+          "summary": "Editar produto",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Alterado com sucesso",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 201,
+              "totalCases": 0,
+              "description": "Cadastro com sucesso",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Já existe produto com esse nome",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 401,
+              "totalCases": 0,
+              "description": "Token ausente, inválido ou expirado",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 403,
+              "totalCases": 0,
+              "description": "Rota exclusiva para administradores (`administrador = true`)",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carrinhos",
+          "method": "GET",
+          "summary": "Listar carrinhos cadastrados",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Lista de carrinhos",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "_id",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "precoTotal",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "quantidadeTotal",
+              "coverage": "UNCOVERED"
+            },
+            {
+              "name": "idUsuario",
+              "coverage": "UNCOVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carrinhos",
+          "method": "POST",
+          "summary": "Cadastrar carrinho",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 201,
+              "totalCases": 0,
+              "description": "Cadastro com sucesso",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Algo deu errado",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 401,
+              "totalCases": 0,
+              "description": "Token ausente, inválido ou expirado",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carrinhos/{_id}",
+          "method": "GET",
+          "summary": "Buscar carrinho por ID",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Carrinho encontrado",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Carrinho não encontrado",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carrinhos/concluir-compra",
+          "method": "DELETE",
+          "summary": "Excluir carrinho",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Registro excluído com sucesso | Não foi encontrado carrinho para esse usuário",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 401,
+              "totalCases": 0,
+              "description": "Token ausente, inválido ou expirado",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        },
+        {
+          "name": "/carrinhos/cancelar-compra",
+          "method": "DELETE",
+          "summary": "Excluir carrinho e retornar produtos para estoque",
+          "coverage": "UNCOVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "Registro excluído com sucesso | Não foi encontrado carrinho para esse usuário",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 401,
+              "totalCases": 0,
+              "description": "Token ausente, inválido ou expirado",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 0,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-05-29T05:34:54.486Z",
+              "totalCoverage": 0
+            }
+          ]
+        }
+      ],
+      "totalCoverage": 15,
+      "totalCoverageHistory": [
+        {
+          "createdAt": "2025-05-28T22:10:57.173Z",
+          "totalCoverage": 8.8
+        },
+        {
+          "createdAt": "2025-05-28T22:11:01.190Z",
+          "totalCoverage": 8.8
+        },
+        {
+          "createdAt": "2025-05-28T22:11:34.449Z",
+          "totalCoverage": 13.8
+        },
+        {
+          "createdAt": "2025-05-29T05:34:54.486Z",
+          "totalCoverage": 15
+        }
+      ]
+    }
+  }
+}

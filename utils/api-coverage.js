@@ -91,6 +91,7 @@ export class ApiCoverage {
    * await apiCoverage.loadSpec('./swagger.json');
    */
   async loadSpec(source) {
+    this.config.source = source
     if (this.apiSpec) return this.apiSpec
     try {
       const urlRegex = /^https?:\/\//
@@ -839,9 +840,8 @@ S   */
     const report = this.#buildReport(endpoints, overallCoverage)
 
     await this.#writeReport(report)
-    await this.#mergeStats(report)
 
-    await this.#generateHtmlReport(report)
+    await this.#generateHtmlReport()
 
     return report
   }
@@ -1021,12 +1021,14 @@ S   */
       swaggerUrl: service?.swaggerUrl,
       swaggerFile: service?.swaggerFile
     }))
-
+    this.currentService = this?.config.services.find(
+      service => service?.swaggerUrl === this.config.source || service?.swaggerFile === this.config.source
+    )
     return {
       config: { services },
       createdAt: new Date().toISOString(),
       servicesCoverage: {
-        [this.config?.services[0]?.key]: {
+        [this.currentService?.key]: {
           endpoints,
           totalCoverage: overallCoverage,
           totalCoverageHistory: [
@@ -1041,20 +1043,62 @@ S   */
   }
 
   async #writeReport(report) {
-    return await this.#safeWriteFile(this.JSON_REPORT_PATH, JSON.stringify(report, null, 2))
+    try {
+      let existingReport = {}
+      if (fs.existsSync(this.JSON_REPORT_PATH)) {
+        existingReport = JSON.parse(await fs.promises.readFile(this.JSON_REPORT_PATH, 'utf-8'))
+      }
+
+      const mergedConfig = {
+        services: [...(existingReport.config?.services || []), ...(report.config.services || [])].filter(
+          (service, index, self) => index === self.findIndex(s => s.key === service.key)
+        )
+      }
+      const mergedServicesCoverage = {
+        ...(existingReport.servicesCoverage || {}),
+        ...report.servicesCoverage
+      }
+
+      for (const service of mergedConfig.services) {
+        if (!mergedServicesCoverage[service.key]) {
+          mergedServicesCoverage[service.key] = {
+            endpoints: [],
+            totalCoverage: 0,
+            totalCoverageHistory: [
+              {
+                createdAt: new Date().toISOString(),
+                totalCoverage: 0
+              }
+            ]
+          }
+        }
+      }
+
+      const mergedReport = {
+        config: mergedConfig,
+        createdAt: new Date().toISOString(),
+        servicesCoverage: mergedServicesCoverage
+      }
+      await this.#mergeStats(mergedReport)
+      return await this.#safeWriteFile(this.JSON_REPORT_PATH, JSON.stringify(mergedReport, null, 2))
+    } catch (err) {
+      throw new Error(`Failed to merge and write report: ${err.message}`)
+    }
   }
 
   async #mergeStats(report) {
+    const normalizedServiceKey = this.currentService.key.replace(/[^a-zA-Z0-9]/g, '')
+    this.uniqueStatsPath = this.STATS_PATH.replace('.json', `_${normalizedServiceKey}.json`)
     try {
-      const reportStats = report.servicesCoverage[this.config?.services[0]?.key].totalCoverageHistory
-      if (!fs.existsSync(this.STATS_PATH)) {
-        return this.#safeWriteFile(this.STATS_PATH, JSON.stringify(reportStats, null, 2))
+      const reportStats = report.servicesCoverage[this.currentService.key].totalCoverageHistory
+      if (!fs.existsSync(this.uniqueStatsPath)) {
+        return this.#safeWriteFile(this.uniqueStatsPath, JSON.stringify(reportStats, null, 2))
       } else {
-        const stats = JSON.parse(await fs.promises.readFile(this.STATS_PATH, 'utf-8'))
-        !this.playwright && (report.servicesCoverage[this.config?.services[0]?.key].totalCoverageHistory = [...stats, ...reportStats])
+        const stats = JSON.parse(await fs.promises.readFile(this.uniqueStatsPath, 'utf-8'))
+        report.servicesCoverage[this.currentService?.key].totalCoverageHistory = [...stats, ...reportStats]
         return this.#safeWriteFile(
-          this.STATS_PATH,
-          JSON.stringify(report.servicesCoverage[this.config?.services[0]?.key].totalCoverageHistory, null, 2)
+          this.uniqueStatsPath,
+          JSON.stringify(report.servicesCoverage[this.currentService?.key].totalCoverageHistory, null, 2)
         )
       }
     } catch (err) {
@@ -1062,15 +1106,16 @@ S   */
     }
   }
 
-  async #generateHtmlReport(report) {
+  async #generateHtmlReport() {
     try {
       await fs.promises.cp(this.TEMPLATE_PATH, this.REPORT_PATH, { recursive: true })
+      const report = await fs.promises.readFile(this.JSON_REPORT_PATH, 'utf-8')
       let html = await fs.promises.readFile(this.REPORT_PATH, 'utf-8')
       html = html.replace(
         /<script id="state" type="application\/json">[\s\S]*?<\/script>/,
-        `<script id="state" type="application/json">${JSON.stringify(report, null, 2)}</script>`
+        `<script id="state" type="application/json">${report}</script>`
       )
-      !this.playwright && (await fs.promises.unlink(this.JSON_REPORT_HISTORY_PATH))
+      await fs.promises.unlink(this.JSON_REPORT_HISTORY_PATH)
       return this.#safeWriteFile(this.REPORT_PATH, html)
     } catch (err) {
       throw new Error('ERROR copying template HTML file ' + err.message)

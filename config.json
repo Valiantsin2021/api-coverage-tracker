@@ -1,7 +1,7 @@
 {
   "services": [
     {
-      "key": "fakestore-api-service",
+      "key": "Fakestore-api-service",
       "name": "FakeStore API",
       "tags": [
         "API",
@@ -9,7 +9,29 @@
       ],
       "repository": "",
       "swaggerUrl": "https://fakestoreapi.com/fakestoreapi.json",
-      "swaggerFile": null
+      "swaggerFile": ""
+    },
+    {
+      "key": "Pets-playwright-api-service",
+      "name": "Pets API",
+      "tags": [
+        "API",
+        "COVERAGE"
+      ],
+      "repository": "",
+      "swaggerUrl": "https://petstore.swagger.io/v2/swagger.json",
+      "swaggerFile": ""
+    },
+    {
+      "key": "ServeRest-api-service",
+      "name": "ServeRest API",
+      "tags": [
+        "API",
+        "COVERAGE"
+      ],
+      "repository": "",
+      "swaggerUrl": "https://raw.githubusercontent.com/ServeRest/ServeRest/trunk/docs/swagger.json",
+      "swaggerFile": ""
     }
   ],
   "json-report-path": "./reports/report.json",
