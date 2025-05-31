@@ -12,7 +12,15 @@
     "totalCoverage": 31.3
   },
   {
-    "createdAt": "2025-05-29T19:57:35.416Z",
+    "createdAt": "2025-05-31T07:11:25.873Z",
+    "totalCoverage": 23.8
+  },
+  {
+    "createdAt": "2025-05-31T07:11:45.549Z",
+    "totalCoverage": 31.3
+  },
+  {
+    "createdAt": "2025-05-31T07:17:43.998Z",
     "totalCoverage": 77.5
   }
 ]
