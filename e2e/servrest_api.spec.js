@@ -37,6 +37,8 @@ test.afterEach(async ({ request }) => {
 test.afterAll(async () => {
   await apiCoverage.generateReport()
 })
+test.describe.configure({ mode: 'serial' })
+
 test.describe('ServeRest API Tests', () => {
   test.describe('Login Tests', () => {
     test('POST /usuarios - create user successfully', async ({ request }) => {
@@ -177,7 +179,7 @@ test.describe('ServeRest API Tests', () => {
       }
     })
 
-    test.skip('GET /produtos - list all products', async ({ request }) => {
+    test('GET /produtos - list all products', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/produtos`)
       expect.soft(response.status()).toBe(200)
 
@@ -187,7 +189,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(Array.isArray(data.produtos)).toBe(true)
     })
 
-    test.skip('POST /produtos - create product successfully', async ({ request }) => {
+    test('POST /produtos - create product successfully', async ({ request }) => {
       const response = await request.post(`${BASE_URL}/produtos`, {
         headers: {
           Authorization: authToken
@@ -203,7 +205,7 @@ test.describe('ServeRest API Tests', () => {
       productId = data._id
     })
 
-    test.skip('POST /produtos - unauthorized (no token)', async ({ request }) => {
+    test('POST /produtos - unauthorized (no token)', async ({ request }) => {
       const response = await request.post(`${BASE_URL}/produtos`, {
         data: testProduct
       })
@@ -213,7 +215,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data.message).toBe('Token de acesso ausente, inválido, expirado ou usuário do token não existe mais')
     })
 
-    test.skip('POST /produtos - duplicate product name', async ({ request }) => {
+    test('POST /produtos - duplicate product name', async ({ request }) => {
       const response = await request.post(`${BASE_URL}/produtos`, {
         headers: {
           Authorization: authToken
@@ -226,7 +228,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data.message).toBe('Já existe produto com esse nome')
     })
 
-    test.skip('GET /produtos/{id} - get product by ID', async ({ request }) => {
+    test('GET /produtos/{id} - get product by ID', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/produtos/${productId}`)
       expect.soft(response.status()).toBe(200)
 
@@ -238,15 +240,15 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data._id).toBe(productId)
     })
 
-    test.skip('GET /produtos/{id} - product not found', async ({ request }) => {
+    test('GET /produtos/{id} - product not found', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/produtos/invalidid123`)
       expect.soft(response.status()).toBe(400)
 
       const data = await response.json()
-      expect.soft(data.message).toBe('Produto não encontrado')
+      expect.soft(data.id).toBe('id' + ' deve ter exatamente 16 caracteres alfanuméricos')
     })
 
-    test.skip('PUT /produtos/{id} - update product', async ({ request }) => {
+    test('PUT /produtos/{id} - update product', async ({ request }) => {
       const updatedProduct = {
         nome: `Updated Product ${Date.now()}`,
         preco: 150,
@@ -268,7 +270,7 @@ test.describe('ServeRest API Tests', () => {
   })
 
   test.describe('Shopping Cart Tests', () => {
-    test.skip('GET /carrinhos - list all carts', async ({ request }) => {
+    test('GET /carrinhos - list all carts', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/carrinhos`)
       expect.soft(response.status()).toBe(200)
 
@@ -278,7 +280,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(Array.isArray(data.carrinhos)).toBe(true)
     })
 
-    test.skip('POST /carrinhos - create cart successfully', async ({ request }) => {
+    test('POST /carrinhos - create cart successfully', async ({ request }) => {
       const cartData = {
         produtos: [
           {
@@ -303,7 +305,7 @@ test.describe('ServeRest API Tests', () => {
       cartId = data._id
     })
 
-    test.skip('POST /carrinhos - unauthorized (no token)', async ({ request }) => {
+    test('POST /carrinhos - unauthorized (no token)', async ({ request }) => {
       const cartData = {
         produtos: [
           {
@@ -322,7 +324,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data.message).toBe('Token de acesso ausente, inválido, expirado ou usuário do token não existe mais')
     })
 
-    test.skip('GET /carrinhos/{id} - get cart by ID', async ({ request }) => {
+    test('GET /carrinhos/{id} - get cart by ID', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/carrinhos/${cartId}`)
       expect.soft(response.status()).toBe(200)
 
@@ -334,15 +336,15 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data._id).toBe(cartId)
     })
 
-    test.skip('GET /carrinhos/{id} - cart not found', async ({ request }) => {
+    test('GET /carrinhos/{id} - cart not found', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/carrinhos/invalidid123`)
       expect.soft(response.status()).toBe(400)
 
       const data = await response.json()
-      expect.soft(data.message).toBe('Carrinho não encontrado')
+      expect.soft(data.id).toBe('id deve ter exatamente 16 caracteres alfanuméricos')
     })
 
-    test.skip('DELETE /carrinhos/cancelar-compra - cancel purchase', async ({ request }) => {
+    test('DELETE /carrinhos/cancelar-compra - cancel purchase', async ({ request }) => {
       const response = await request.delete(`${BASE_URL}/carrinhos/cancelar-compra`, {
         headers: {
           Authorization: authToken
@@ -354,7 +356,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(data.message).toMatch(/Registro excluído com sucesso|Não foi encontrado carrinho para esse usuário/)
     })
 
-    test.skip('DELETE /carrinhos/concluir-compra - complete purchase', async ({ request }) => {
+    test('DELETE /carrinhos/concluir-compra - complete purchase', async ({ request }) => {
       // First create a new cart
       const cartData = {
         produtos: [
@@ -386,7 +388,7 @@ test.describe('ServeRest API Tests', () => {
   })
 
   test.describe('Query Parameter Tests', () => {
-    test.skip('GET /usuarios with query parameters', async ({ request }) => {
+    test('GET /usuarios with query parameters', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/usuarios?administrador=true`)
       expect.soft(response.status()).toBe(200)
 
@@ -401,7 +403,7 @@ test.describe('ServeRest API Tests', () => {
       }
     })
 
-    test.skip('GET /produtos with query parameters', async ({ request }) => {
+    test('GET /produtos with query parameters', async ({ request }) => {
       const response = await request.get(`${BASE_URL}/produtos?preco=100`)
       expect.soft(response.status()).toBe(200)
 
@@ -418,7 +420,7 @@ test.describe('ServeRest API Tests', () => {
   })
 
   test.describe('Error Handling Tests', () => {
-    test.skip('Invalid JSON in request body', async ({ request }) => {
+    test('Invalid JSON in request body', async ({ request }) => {
       const response = await request.post(`${BASE_URL}/usuarios`, {
         data: '{"invalid": json}',
         headers: {
@@ -429,7 +431,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(response.status()).toBe(400)
     })
 
-    test.skip('Missing required fields', async ({ request }) => {
+    test('Missing required fields', async ({ request }) => {
       const response = await request.post(`${BASE_URL}/usuarios`, {
         data: {
           nome: 'Test User'
@@ -440,7 +442,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(response.status()).toBe(400)
     })
 
-    test.skip('Invalid token format', async ({ request }) => {
+    test('Invalid token format', async ({ request }) => {
       const response = await request.post(`${BASE_URL}/produtos`, {
         headers: {
           Authorization: 'InvalidToken'
@@ -453,7 +455,7 @@ test.describe('ServeRest API Tests', () => {
   })
 
   test.describe('Data Validation Tests', () => {
-    test.skip('User email format validation', async ({ request }) => {
+    test('User email format validation', async ({ request }) => {
       const invalidUser = {
         nome: 'Test User',
         email: 'invalid-email',
@@ -468,7 +470,7 @@ test.describe('ServeRest API Tests', () => {
       expect.soft(response.status()).toBe(400)
     })
 
-    test.skip('Product price validation', async ({ request }) => {
+    test('Product price validation', async ({ request }) => {
       const invalidProduct = {
         nome: `Invalid Product ${Date.now()}`,
         preco: -10, // Negative price should be invalid
@@ -488,7 +490,7 @@ test.describe('ServeRest API Tests', () => {
   })
 
   test.describe('Cleanup', () => {
-    test.skip('DELETE /produtos/{id} - cleanup test product', async ({ request }) => {
+    test('DELETE /produtos/{id} - cleanup test product', async ({ request }) => {
       if (productId) {
         const response = await request.delete(`${BASE_URL}/produtos/${productId}`, {
           headers: {
@@ -500,16 +502,4 @@ test.describe('ServeRest API Tests', () => {
       }
     })
   })
-})
-
-// Configuration for running tests
-test.describe.configure({ mode: 'serial' })
-
-// Global test configuration
-test.beforeAll(async () => {
-  console.log('Starting ServeRest API tests...')
-})
-
-test.afterAll(async () => {
-  console.log('ServeRest API tests completed.')
 })

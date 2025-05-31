@@ -188,8 +188,8 @@ export class ApiCoverage {
    * Start tracking API requests by patching the provided HTTP client
    * @param {Object} client - HTTP client instance (Playwright APIRequestContext, Axios instance, etc.)
    * @param {Object} [options] - Options object
-   * @param {string} [options.clientType='playwright'] - Type of client ('playwright', 'axios', 'fetch')
-   * @param {string} [options.coverage='basic'] - Coverage type ('basic', 'detailed')
+   * @param {'playwright' | 'axios' | 'fetch'} [options.clientType='playwright'] - Type of client ('playwright', 'axios', 'fetch')
+   * @param {'basic' | 'detailed'} [options.coverage='basic'] - Coverage type ('basic', 'detailed')
    * @returns {boolean} - Whether tracking was successfully started
    * @throws {Error} - Throws an error if client type is unsupported
    * @example
@@ -572,7 +572,7 @@ export class ApiCoverage {
    * Register requests from a Postman collection
    * @param {Object} params - Configuration options
    * @param {string} params.collectionPath - Path to Postman collection file
-   * @param {string} params.coverage - Coverage type ('basic', 'detailed')
+   * @param {'basic' | 'detailed'} params.coverage - Coverage type ('basic', 'detailed')
    * @returns {void}
    * @example
    * apiCoverage.registerPostmanRequests('./collection.json', 'detailed');

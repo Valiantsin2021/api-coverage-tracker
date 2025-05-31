@@ -36,7 +36,7 @@
       }
     ]
   },
-  "createdAt": "2025-05-29T19:55:41.079Z",
+  "createdAt": "2025-05-31T07:11:45.550Z",
   "servicesCoverage": {
     "Fakestore-api-service": {
       "endpoints": [
@@ -65,7 +65,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.544Z",
+              "createdAt": "2025-05-31T07:11:45.546Z",
               "totalCoverage": 100
             }
           ]
@@ -95,7 +95,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 100
             }
           ]
@@ -125,7 +125,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 100
             }
           ]
@@ -155,7 +155,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 100
             }
           ]
@@ -185,7 +185,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 100
             }
           ]
@@ -215,7 +215,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -245,7 +245,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -275,7 +275,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -305,7 +305,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -335,7 +335,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -365,7 +365,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -395,7 +395,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -425,7 +425,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -455,7 +455,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -485,7 +485,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.548Z",
               "totalCoverage": 0
             }
           ]
@@ -515,7 +515,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-28T22:10:51.545Z",
+              "createdAt": "2025-05-31T07:11:45.549Z",
               "totalCoverage": 0
             }
           ]
@@ -533,6 +533,14 @@
         },
         {
           "createdAt": "2025-05-28T22:10:51.545Z",
+          "totalCoverage": 31.3
+        },
+        {
+          "createdAt": "2025-05-31T07:11:25.873Z",
+          "totalCoverage": 23.8
+        },
+        {
+          "createdAt": "2025-05-31T07:11:45.549Z",
           "totalCoverage": 31.3
         }
       ]
@@ -574,7 +582,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.078Z",
+              "createdAt": "2025-05-30T21:59:17.577Z",
               "totalCoverage": 80
             }
           ]
@@ -584,11 +592,11 @@
           "method": "GET",
           "summary": "Listar usuários cadastrados",
           "coverage": "COVERED",
-          "totalCases": 1,
+          "totalCases": 2,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 1,
+              "totalCases": 2,
               "description": "Lista de usuários",
               "responseCoverage": "COVERED"
             }
@@ -612,15 +620,15 @@
             },
             {
               "name": "administrador",
-              "coverage": "UNCOVERED"
+              "coverage": "COVERED"
             }
           ],
           "requestCoverage": "MISSING",
-          "totalCoverage": 80,
+          "totalCoverage": 84,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 80
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 84
             }
           ]
         },
@@ -629,7 +637,7 @@
           "method": "POST",
           "summary": "Cadastrar usuário",
           "coverage": "COVERED",
-          "totalCases": 3,
+          "totalCases": 6,
           "statusCodes": [
             {
               "value": 201,
@@ -639,7 +647,7 @@
             },
             {
               "value": 400,
-              "totalCases": 1,
+              "totalCases": 4,
               "description": "E-mail já cadastrado",
               "responseCoverage": "COVERED"
             }
@@ -649,7 +657,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
+              "createdAt": "2025-05-30T21:59:17.578Z",
               "totalCoverage": 80
             }
           ]
@@ -679,7 +687,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
+              "createdAt": "2025-05-30T21:59:17.578Z",
               "totalCoverage": 80
             }
           ]
@@ -709,7 +717,7 @@
           "totalCoverage": 60,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
+              "createdAt": "2025-05-30T21:59:17.578Z",
               "totalCoverage": 60
             }
           ]
@@ -745,7 +753,7 @@
           "totalCoverage": 53.33333333333333,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
+              "createdAt": "2025-05-30T21:59:17.578Z",
               "totalCoverage": 53.33333333333333
             }
           ]
@@ -754,14 +762,14 @@
           "name": "/produtos",
           "method": "GET",
           "summary": "Listar produtos cadastrados",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 2,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 2,
               "description": "Lista de produtos",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             }
           ],
           "queryParameters": [
@@ -775,7 +783,7 @@
             },
             {
               "name": "preco",
-              "coverage": "UNCOVERED"
+              "coverage": "COVERED"
             },
             {
               "name": "descricao",
@@ -787,11 +795,11 @@
             }
           ],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 84,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 84
             }
           ]
         },
@@ -799,26 +807,26 @@
           "name": "/produtos",
           "method": "POST",
           "summary": "Cadastrar produto",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 5,
           "statusCodes": [
             {
               "value": 201,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Cadastro com sucesso",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
-              "totalCases": 0,
+              "totalCases": 2,
               "description": "Já existe produto com esse nome",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 401,
-              "totalCases": 0,
+              "totalCases": 2,
               "description": "Token ausente, inválido ou expirado",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 403,
@@ -829,11 +837,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 70,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 70
             }
           ]
         },
@@ -841,29 +849,29 @@
           "name": "/produtos/{_id}",
           "method": "GET",
           "summary": "Buscar produto por ID",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 2,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Produto encontrado",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Produto não encontrado",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             }
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 80
             }
           ]
         },
@@ -871,14 +879,14 @@
           "name": "/produtos/{_id}",
           "method": "DELETE",
           "summary": "Excluir produto",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Registro excluído com sucesso | Nenhum registro excluído",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -901,11 +909,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 50,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 50
             }
           ]
         },
@@ -913,14 +921,14 @@
           "name": "/produtos/{_id}",
           "method": "PUT",
           "summary": "Editar produto",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Alterado com sucesso",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 201,
@@ -949,11 +957,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 48,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 48
             }
           ]
         },
@@ -961,14 +969,14 @@
           "name": "/carrinhos",
           "method": "GET",
           "summary": "Listar carrinhos cadastrados",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Lista de carrinhos",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             }
           ],
           "queryParameters": [
@@ -990,11 +998,11 @@
             }
           ],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 80
             }
           ]
         },
@@ -1002,14 +1010,14 @@
           "name": "/carrinhos",
           "method": "POST",
           "summary": "Cadastrar carrinho",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 3,
           "statusCodes": [
             {
               "value": 201,
-              "totalCases": 0,
+              "totalCases": 2,
               "description": "Cadastro com sucesso",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -1019,18 +1027,18 @@
             },
             {
               "value": 401,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Token ausente, inválido ou expirado",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             }
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 66.66666666666666,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 66.66666666666666
             }
           ]
         },
@@ -1038,29 +1046,29 @@
           "name": "/carrinhos/{_id}",
           "method": "GET",
           "summary": "Buscar carrinho por ID",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 2,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Carrinho encontrado",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Carrinho não encontrado",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             }
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 80
             }
           ]
         },
@@ -1068,14 +1076,14 @@
           "name": "/carrinhos/concluir-compra",
           "method": "DELETE",
           "summary": "Excluir carrinho",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Registro excluído com sucesso | Não foi encontrado carrinho para esse usuário",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 401,
@@ -1086,11 +1094,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -1098,14 +1106,14 @@
           "name": "/carrinhos/cancelar-compra",
           "method": "DELETE",
           "summary": "Excluir carrinho e retornar produtos para estoque",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Registro excluído com sucesso | Não foi encontrado carrinho para esse usuário",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 401,
@@ -1116,16 +1124,16 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-29T19:55:41.079Z",
-              "totalCoverage": 0
+              "createdAt": "2025-05-30T21:59:17.578Z",
+              "totalCoverage": 100
             }
           ]
         }
       ],
-      "totalCoverage": 27.1,
+      "totalCoverage": 74.8,
       "totalCoverageHistory": [
         {
           "createdAt": "2025-05-28T22:10:57.173Z",
@@ -1158,6 +1166,102 @@
         {
           "createdAt": "2025-05-29T19:55:41.079Z",
           "totalCoverage": 27.1
+        },
+        {
+          "createdAt": "2025-05-30T21:50:23.036Z",
+          "totalCoverage": 32.1
+        },
+        {
+          "createdAt": "2025-05-30T21:50:35.624Z",
+          "totalCoverage": 35.2
+        },
+        {
+          "createdAt": "2025-05-30T21:50:47.708Z",
+          "totalCoverage": 35.8
+        },
+        {
+          "createdAt": "2025-05-30T21:52:08.212Z",
+          "totalCoverage": 36.5
+        },
+        {
+          "createdAt": "2025-05-30T21:52:18.892Z",
+          "totalCoverage": 40.2
+        },
+        {
+          "createdAt": "2025-05-30T21:52:31.257Z",
+          "totalCoverage": 41.5
+        },
+        {
+          "createdAt": "2025-05-30T21:53:14.092Z",
+          "totalCoverage": 41.5
+        },
+        {
+          "createdAt": "2025-05-30T21:53:25.468Z",
+          "totalCoverage": 44.5
+        },
+        {
+          "createdAt": "2025-05-30T21:55:20.297Z",
+          "totalCoverage": 49.5
+        },
+        {
+          "createdAt": "2025-05-30T21:55:32.289Z",
+          "totalCoverage": 52.8
+        },
+        {
+          "createdAt": "2025-05-30T21:55:57.900Z",
+          "totalCoverage": 52.8
+        },
+        {
+          "createdAt": "2025-05-30T21:56:11.468Z",
+          "totalCoverage": 53.6
+        },
+        {
+          "createdAt": "2025-05-30T21:56:24.612Z",
+          "totalCoverage": 57.4
+        },
+        {
+          "createdAt": "2025-05-30T21:56:48.154Z",
+          "totalCoverage": 58.6
+        },
+        {
+          "createdAt": "2025-05-30T21:56:58.961Z",
+          "totalCoverage": 64.9
+        },
+        {
+          "createdAt": "2025-05-30T21:57:12.724Z",
+          "totalCoverage": 71.1
+        },
+        {
+          "createdAt": "2025-05-30T21:57:28.886Z",
+          "totalCoverage": 71.4
+        },
+        {
+          "createdAt": "2025-05-30T21:57:43.187Z",
+          "totalCoverage": 71.6
+        },
+        {
+          "createdAt": "2025-05-30T21:57:56.743Z",
+          "totalCoverage": 71.6
+        },
+        {
+          "createdAt": "2025-05-30T21:58:09.449Z",
+          "totalCoverage": 71.6
+        },
+        {
+          "createdAt": "2025-05-30T21:58:21.866Z",
+          "totalCoverage": 71.6
+        },
+        {
+          "createdAt": "2025-05-30T21:58:50.865Z",
+          "totalCoverage": 71.6
+        },
+        {
+          "createdAt": "2025-05-30T21:59:04.828Z",
+          "totalCoverage": 71.6
+        },
+        {
+          "createdAt": "2025-05-30T21:59:17.578Z",
+          "totalCoverage": 74.8
         }
       ]
     }
