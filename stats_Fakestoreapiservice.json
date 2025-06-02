@@ -38,5 +38,9 @@
   {
     "createdAt": "2025-06-02T20:18:45.103Z",
     "totalCoverage": 31.3
+  },
+  {
+    "createdAt": "2025-06-02T20:28:29.123Z",
+    "totalCoverage": 77.5
   }
 ]
