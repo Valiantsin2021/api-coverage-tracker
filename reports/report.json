@@ -36,7 +36,7 @@
       }
     ]
   },
-  "createdAt": "2025-05-31T07:11:45.550Z",
+  "createdAt": "2025-06-02T20:18:45.104Z",
   "servicesCoverage": {
     "Fakestore-api-service": {
       "endpoints": [
@@ -65,7 +65,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.546Z",
+              "createdAt": "2025-06-02T20:18:45.101Z",
               "totalCoverage": 100
             }
           ]
@@ -95,7 +95,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.102Z",
               "totalCoverage": 100
             }
           ]
@@ -125,7 +125,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.102Z",
               "totalCoverage": 100
             }
           ]
@@ -155,7 +155,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.102Z",
               "totalCoverage": 100
             }
           ]
@@ -185,7 +185,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 100
             }
           ]
@@ -215,7 +215,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -245,7 +245,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -275,7 +275,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -305,7 +305,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -335,7 +335,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -365,7 +365,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -395,7 +395,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -425,7 +425,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -455,7 +455,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -485,7 +485,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.548Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -515,7 +515,7 @@
           "totalCoverage": 0,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-31T07:11:45.549Z",
+              "createdAt": "2025-06-02T20:18:45.103Z",
               "totalCoverage": 0
             }
           ]
@@ -541,6 +541,26 @@
         },
         {
           "createdAt": "2025-05-31T07:11:45.549Z",
+          "totalCoverage": 31.3
+        },
+        {
+          "createdAt": "2025-06-02T20:01:17.387Z",
+          "totalCoverage": 31.3
+        },
+        {
+          "createdAt": "2025-06-02T20:11:19.839Z",
+          "totalCoverage": 31.3
+        },
+        {
+          "createdAt": "2025-06-02T20:11:46.917Z",
+          "totalCoverage": 23.8
+        },
+        {
+          "createdAt": "2025-06-02T20:18:11.797Z",
+          "totalCoverage": 23.8
+        },
+        {
+          "createdAt": "2025-06-02T20:18:45.103Z",
           "totalCoverage": 31.3
         }
       ]

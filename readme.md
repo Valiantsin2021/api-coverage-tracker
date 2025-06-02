@@ -26,7 +26,7 @@ It calculates the API testing coverage based on the endpoints, status codes per 
 
 For Axios and Fetch clients, it also tracks the previous coverage statistics.
 
-For Postman collections it also tracks the previous coverage statistics.
+For Postman collections it also tracks the previous coverage statistics. Supports run from the command line.
 
 ## [Coverage Report sample](https://valiantsin2021.github.io/api-coverage-tracker)
 
@@ -288,7 +288,14 @@ it('API coverage test', () => {
 })
 ```
 
-### Postman example:
+### Postman example (cli):
+
+```bash
+npx api-coverage-tracker --spec 'https://fakestoreapi.com/fakestoreapi.json' --collection './e2e/data/FakeStoreAPI.postman_collection.json' --coverage basic
+
+```
+
+### Postman example (inline):
 
 ```javascript
 import config from '../config.json' with { type: 'json' }

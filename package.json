@@ -1,15 +1,16 @@
 {
   "name": "api-coverage-tracker",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "A universal library for tracking API coverage against OpenAPI/Swagger specifications from URL or local file. Supports Axis, Fetch, Playwright and manual registry of the responses",
   "main": "utils/api-coverage.js",
-  "exports": {
-    ".": "./utils/api-coverage.js"
+  "bin": {
+    "api-coverage-tracker": "./utils/cli.js"
   },
   "type": "module",
   "scripts": {
     "test-axios": "node examples/api-coverage-example.js",
     "test-playwright": "npx playwright test",
+    "test-postman": "npx api-coverage-tracker --spec 'https://fakestoreapi.com/fakestoreapi.json' --collection './e2e/data/FakeStoreAPI.postman_collection.json' --coverage detailed",
     "lint": "eslint ."
   },
   "keywords": [
