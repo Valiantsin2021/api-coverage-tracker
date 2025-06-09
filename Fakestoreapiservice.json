@@ -1,0 +1,26 @@
+[
+  {
+    "createdAt": "2025-06-08T23:11:22.515Z",
+    "totalCoverage": 31.3
+  },
+  {
+    "createdAt": "2025-06-08T23:33:14.782Z",
+    "totalCoverage": 100
+  },
+  {
+    "createdAt": "2025-06-09T07:14:45.682Z",
+    "totalCoverage": 100
+  },
+  {
+    "createdAt": "2025-06-09T10:14:04.571Z",
+    "totalCoverage": 77.5
+  },
+  {
+    "createdAt": "2025-06-09T12:53:58.974Z",
+    "totalCoverage": 100
+  },
+  {
+    "createdAt": "2025-06-09T13:38:38.441Z",
+    "totalCoverage": 100
+  }
+]

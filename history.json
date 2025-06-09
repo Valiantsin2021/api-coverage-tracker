@@ -1,0 +1,725 @@
+[
+  {
+    "method": "GET",
+    "path": "/products/{id}",
+    "statuses": {
+      "200": 3
+    },
+    "queryParams": []
+  },
+  {
+    "method": "PUT",
+    "path": "/products/{id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/products/{id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/products",
+    "statuses": {
+      "200": 8
+    },
+    "queryParams": [
+      "limit",
+      "sort"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/products",
+    "statuses": {
+      "200": 2
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/usuarios",
+    "statuses": {
+      "201": 2,
+      "400": 4
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/login",
+    "statuses": {
+      "200": 1,
+      "401": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/usuarios",
+    "statuses": {
+      "200": 2
+    },
+    "queryParams": [
+      "administrador"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/usuarios/{_id}",
+    "statuses": {
+      "200": 1,
+      "400": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "PUT",
+    "path": "/usuarios/{_id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/usuarios/{_id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/produtos",
+    "statuses": {
+      "200": 2
+    },
+    "queryParams": [
+      "preco"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/produtos",
+    "statuses": {
+      "201": 1,
+      "400": 2,
+      "401": 2
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/produtos/{_id}",
+    "statuses": {
+      "200": 1,
+      "400": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "PUT",
+    "path": "/produtos/{_id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/carrinhos",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/carrinhos",
+    "statuses": {
+      "201": 2,
+      "401": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/carrinhos/{_id}",
+    "statuses": {
+      "200": 1,
+      "400": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/carrinhos/cancelar-compra",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/carrinhos/concluir-compra",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/produtos/{_id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/pet",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "PUT",
+    "path": "/pet",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/pet/findByStatus",
+    "statuses": {
+      "200": 2
+    },
+    "queryParams": [
+      "status"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/pet/findByTags",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": [
+      "tags"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/pet/{petId}",
+    "statuses": {
+      "200": 1,
+      "404": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/pet/{petId}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/pet/{petId}/uploadImage",
+    "statuses": {
+      "415": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/pet/{petId}",
+    "statuses": {
+      "200": 1,
+      "404": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/store/inventory",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/store/order",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/store/order/{orderId}",
+    "statuses": {
+      "200": 1,
+      "404": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/store/order/{orderId}",
+    "statuses": {
+      "200": 1,
+      "404": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/user",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/user/createWithArray",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/user/createWithList",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/user/login",
+    "statuses": {
+      "200": 2
+    },
+    "queryParams": [
+      "username",
+      "password"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/user/logout",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/user/{username}",
+    "statuses": {
+      "200": 1,
+      "404": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "PUT",
+    "path": "/user/{username}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/user/{username}",
+    "statuses": {
+      "200": 1,
+      "404": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/carts",
+    "statuses": {
+      "200": 8
+    },
+    "queryParams": [
+      "limit",
+      "sort",
+      "startdate",
+      "enddate"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/carts",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/carts/{id}",
+    "statuses": {
+      "200": 2
+    },
+    "queryParams": []
+  },
+  {
+    "method": "PUT",
+    "path": "/carts/{id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/carts/{id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/users",
+    "statuses": {
+      "200": 7
+    },
+    "queryParams": [
+      "limit",
+      "sort"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/users",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/users/{id}",
+    "statuses": {
+      "200": 2
+    },
+    "queryParams": []
+  },
+  {
+    "method": "PUT",
+    "path": "/users/{id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "DELETE",
+    "path": "/users/{id}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/auth/login",
+    "statuses": {
+      "200": 1,
+      "401": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/shutdownJmsListener",
+    "statuses": {
+      "204": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/startupJmsListener",
+    "statuses": {
+      "204": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/cleanDB",
+    "statuses": {
+      "204": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/initializeDB",
+    "statuses": {
+      "204": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/setParameter/{name}/{value}",
+    "statuses": {
+      "204": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/login/{username}/{password}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/customers/{customerId}/accounts",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/accounts/{accountId}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/accounts/{accountId}/transactions",
+    "statuses": {
+      "200": 3
+    },
+    "queryParams": [
+      "amount",
+      "month",
+      "type",
+      "fromDate",
+      "toDate",
+      "onDate"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/accounts/{accountId}/transactions/amount/{amount}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/accounts/{accountId}/transactions/month/{month}/type/{type}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/accounts/{accountId}/transactions/fromDate/{fromDate}/toDate/{toDate}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/accounts/{accountId}/transactions/onDate/{onDate}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/deposit",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": [
+      "accountId",
+      "amount"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/transfer",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": [
+      "fromAccountId",
+      "toAccountId",
+      "amount"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/withdraw",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": [
+      "accountId",
+      "amount"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/billpay",
+    "statuses": {
+      "500": 1
+    },
+    "queryParams": [
+      "accountId",
+      "amount"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/requestLoan",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": [
+      "customerId",
+      "amount",
+      "downPayment",
+      "fromAccountId"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/createAccount",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": [
+      "customerId",
+      "newAccountType",
+      "fromAccountId"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/transactions/{transactionId}",
+    "statuses": {
+      "200": 1,
+      "400": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/customers/{customerId}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/customers/update/{customerId}",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": [
+      "firstName",
+      "lastName",
+      "street",
+      "city",
+      "state",
+      "zipCode",
+      "phoneNumber",
+      "ssn",
+      "username",
+      "password"
+    ]
+  },
+  {
+    "method": "GET",
+    "path": "/customers/{customerId}/positions",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/positions/{positionId}",
+    "statuses": {
+      "200": 1,
+      "404": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "GET",
+    "path": "/positions/{positionId}/{startDate}/{endDate}",
+    "statuses": {
+      "400": 1,
+      "404": 1
+    },
+    "queryParams": []
+  },
+  {
+    "method": "POST",
+    "path": "/customers/{customerId}/buyPosition",
+    "statuses": {
+      "200": 1
+    },
+    "queryParams": [
+      "accountId",
+      "name",
+      "symbol",
+      "shares",
+      "pricePerShare"
+    ]
+  },
+  {
+    "method": "POST",
+    "path": "/customers/{customerId}/sellPosition",
+    "statuses": {
+      "404": 1
+    },
+    "queryParams": [
+      "accountId",
+      "positionId",
+      "shares",
+      "pricePerShare"
+    ]
+  }
+]
