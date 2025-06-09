@@ -7,11 +7,10 @@ await apiCoverage.loadSpec('https://fakestoreapi.com/fakestoreapi.json')
 apiCoverage.setDebug(false)
 
 test.beforeEach(async ({ request }) => {
-  apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'detailed' })
+  apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'basic' })
 })
 
 test.afterEach(async ({ request }) => {
-  await apiCoverage.saveHistory()
   apiCoverage.stopTracking(request)
 })
 test.afterAll(async () => {

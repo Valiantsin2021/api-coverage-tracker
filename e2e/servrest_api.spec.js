@@ -31,7 +31,6 @@ test.beforeEach(async ({ request }) => {
 })
 
 test.afterEach(async ({ request }) => {
-  await apiCoverage.saveHistory()
   apiCoverage.stopTracking(request)
 })
 test.afterAll(async () => {

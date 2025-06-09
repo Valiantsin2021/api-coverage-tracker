@@ -10,9 +10,8 @@ apiCoverage.setDebug(false)
 const extension = {
   testHook: [
     async ({ request }, use) => {
-      apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'detailed' })
+      apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'basic' })
       await use()
-      await apiCoverage.saveHistory()
       apiCoverage.stopTracking(request)
       await apiCoverage.generateReport()
     },

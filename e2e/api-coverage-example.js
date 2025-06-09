@@ -38,8 +38,6 @@ async function exampleWithAxios() {
     // Make another request
     console.log('Making second request...')
     const petsResponse = await axiosInstance.get('/pet/findByStatus?status=available')
-    const petsResponse2 = await axiosInstance.get('/pet/findByStatus?status=available')
-    const petsResponse3 = await axiosInstance.get('/pet/findByStatus?status=available')
     console.log('Available pets count:', petsResponse.data.length)
 
     // Get coverage statistics before stopping
@@ -52,9 +50,6 @@ async function exampleWithAxios() {
     // Stop tracking when done
     apiCoverage.stopTracking(axiosInstance)
     console.log('Axios tracking stopped')
-
-    // Save coverage history
-    await apiCoverage.saveHistory()
     // Generate a report
     await apiCoverage.generateReport()
   } catch (error) {
@@ -89,8 +84,6 @@ async function exampleWithFetch() {
     // Get coverage statistics
     const stats = apiCoverage.getCoverageStats()
     console.log('Coverage stats:', stats)
-    // Save coverage history
-    await apiCoverage.saveHistory()
 
     // Generate a report
     await apiCoverage.generateReport()
@@ -111,8 +104,6 @@ async function exampleManualRegistration() {
   // Get coverage statistics
   const stats = apiCoverage.getCoverageStats()
   console.log('Coverage stats:', stats)
-  // Save coverage history
-  await apiCoverage.saveHistory()
 
   // Generate a report
   await apiCoverage.generateReport()

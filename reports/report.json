@@ -33,10 +33,21 @@
         "repository": "",
         "swaggerUrl": "https://raw.githubusercontent.com/ServeRest/ServeRest/trunk/docs/swagger.json",
         "swaggerFile": ""
+      },
+      {
+        "key": "Parabank-api-service",
+        "name": "Parabank API",
+        "tags": [
+          "API",
+          "COVERAGE"
+        ],
+        "repository": "",
+        "swaggerUrl": "https://parabank.parasoft.com/parabank/services/bank/openapi.yaml",
+        "swaggerFile": ""
       }
     ]
   },
-  "createdAt": "2025-06-02T20:18:45.104Z",
+  "createdAt": "2025-06-09T12:53:58.975Z",
   "servicesCoverage": {
     "Fakestore-api-service": {
       "endpoints": [
@@ -45,11 +56,11 @@
           "method": "GET",
           "summary": "Get all products",
           "coverage": "COVERED",
-          "totalCases": 1,
+          "totalCases": 8,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 1,
+              "totalCases": 8,
               "description": "Success",
               "responseCoverage": "COVERED"
             },
@@ -65,7 +76,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.101Z",
+              "createdAt": "2025-06-09T12:53:58.973Z",
               "totalCoverage": 100
             }
           ]
@@ -95,7 +106,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.102Z",
+              "createdAt": "2025-06-09T12:53:58.974Z",
               "totalCoverage": 100
             }
           ]
@@ -105,11 +116,11 @@
           "method": "GET",
           "summary": "Get a single product",
           "coverage": "COVERED",
-          "totalCases": 1,
+          "totalCases": 3,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 1,
+              "totalCases": 3,
               "description": "Success",
               "responseCoverage": "COVERED"
             },
@@ -125,7 +136,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.102Z",
+              "createdAt": "2025-06-09T12:53:58.974Z",
               "totalCoverage": 100
             }
           ]
@@ -155,7 +166,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.102Z",
+              "createdAt": "2025-06-09T12:53:58.974Z",
               "totalCoverage": 100
             }
           ]
@@ -185,7 +196,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
+              "createdAt": "2025-06-09T12:53:58.974Z",
               "totalCoverage": 100
             }
           ]
@@ -194,14 +205,14 @@
           "name": "/carts",
           "method": "GET",
           "summary": "Get all carts",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 8,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 8,
               "description": "Success",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -212,11 +223,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -224,7 +235,7 @@
           "name": "/carts",
           "method": "POST",
           "summary": "Add a new cart",
-          "coverage": "UNCOVERED",
+          "coverage": "COVERED",
           "totalCases": 0,
           "statusCodes": [
             {
@@ -242,11 +253,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -254,14 +265,14 @@
           "name": "/carts/{id}",
           "method": "GET",
           "summary": "Get a single cart",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 2,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 2,
               "description": "Success",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -272,11 +283,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -284,14 +295,14 @@
           "name": "/carts/{id}",
           "method": "PUT",
           "summary": "Update a cart",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Cart updated successfully",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -302,11 +313,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -314,14 +325,14 @@
           "name": "/carts/{id}",
           "method": "DELETE",
           "summary": "Delete a cart",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Cart deleted successfully",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -332,11 +343,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -344,14 +355,14 @@
           "name": "/users",
           "method": "GET",
           "summary": "Get all users",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 7,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 7,
               "description": "Success",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -362,11 +373,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -374,7 +385,7 @@
           "name": "/users",
           "method": "POST",
           "summary": "Add a new user",
-          "coverage": "UNCOVERED",
+          "coverage": "COVERED",
           "totalCases": 0,
           "statusCodes": [
             {
@@ -392,11 +403,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -404,14 +415,14 @@
           "name": "/users/{id}",
           "method": "GET",
           "summary": "Get a single user",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 2,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 2,
               "description": "Success",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -422,11 +433,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -434,14 +445,14 @@
           "name": "/users/{id}",
           "method": "PUT",
           "summary": "Update a user",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "User updated successfully",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -452,11 +463,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -464,14 +475,14 @@
           "name": "/users/{id}",
           "method": "DELETE",
           "summary": "Delete a user",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "User deleted successfully",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -482,11 +493,11 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         },
@@ -494,14 +505,14 @@
           "name": "/auth/login",
           "method": "POST",
           "summary": "Login",
-          "coverage": "UNCOVERED",
-          "totalCases": 0,
+          "coverage": "COVERED",
+          "totalCases": 1,
           "statusCodes": [
             {
               "value": 200,
-              "totalCases": 0,
+              "totalCases": 1,
               "description": "Login successful",
-              "responseCoverage": "UNCOVERED"
+              "responseCoverage": "COVERED"
             },
             {
               "value": 400,
@@ -512,66 +523,642 @@
           ],
           "queryParameters": [],
           "requestCoverage": "MISSING",
-          "totalCoverage": 0,
+          "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-06-02T20:18:45.103Z",
-              "totalCoverage": 0
+              "createdAt": "2025-06-09T12:53:58.974Z",
+              "totalCoverage": 100
             }
           ]
         }
       ],
-      "totalCoverage": 31.3,
+      "totalCoverage": 100,
       "totalCoverageHistory": [
         {
-          "createdAt": "2025-05-28T22:10:47.909Z",
+          "createdAt": "2025-06-08T23:11:22.515Z",
           "totalCoverage": 31.3
         },
         {
-          "createdAt": "2025-05-28T22:10:49.791Z",
-          "totalCoverage": 31.3
+          "createdAt": "2025-06-08T23:33:14.782Z",
+          "totalCoverage": 100
         },
         {
-          "createdAt": "2025-05-28T22:10:51.545Z",
-          "totalCoverage": 31.3
+          "createdAt": "2025-06-09T07:14:45.682Z",
+          "totalCoverage": 100
         },
         {
-          "createdAt": "2025-05-31T07:11:25.873Z",
-          "totalCoverage": 23.8
+          "createdAt": "2025-06-09T10:14:04.571Z",
+          "totalCoverage": 77.5
         },
         {
-          "createdAt": "2025-05-31T07:11:45.549Z",
-          "totalCoverage": 31.3
-        },
-        {
-          "createdAt": "2025-06-02T20:01:17.387Z",
-          "totalCoverage": 31.3
-        },
-        {
-          "createdAt": "2025-06-02T20:11:19.839Z",
-          "totalCoverage": 31.3
-        },
-        {
-          "createdAt": "2025-06-02T20:11:46.917Z",
-          "totalCoverage": 23.8
-        },
-        {
-          "createdAt": "2025-06-02T20:18:11.797Z",
-          "totalCoverage": 23.8
-        },
-        {
-          "createdAt": "2025-06-02T20:18:45.103Z",
-          "totalCoverage": 31.3
+          "createdAt": "2025-06-09T12:53:58.974Z",
+          "totalCoverage": 100
         }
       ]
     },
     "Pets-playwright-api-service": {
-      "endpoints": [],
-      "totalCoverage": 0,
+      "endpoints": [
+        {
+          "name": "/pet/{petId}/uploadImage",
+          "method": "POST",
+          "summary": "uploads an image",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 0,
+              "description": "successful operation",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        },
+        {
+          "name": "/pet",
+          "method": "POST",
+          "summary": "Add a new pet to the store",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 405,
+              "totalCases": 0,
+              "description": "Invalid input",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        },
+        {
+          "name": "/pet",
+          "method": "PUT",
+          "summary": "Update an existing pet",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid ID supplied",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 404,
+              "totalCases": 0,
+              "description": "Pet not found",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 405,
+              "totalCases": 0,
+              "description": "Validation exception",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        },
+        {
+          "name": "/pet/findByStatus",
+          "method": "GET",
+          "summary": "Finds Pets by status",
+          "coverage": "COVERED",
+          "totalCases": 2,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 2,
+              "description": "successful operation",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid status value",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "status",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 80,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 80
+            }
+          ]
+        },
+        {
+          "name": "/pet/findByTags",
+          "method": "GET",
+          "summary": "Finds Pets by tags",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "successful operation",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid tag value",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "tags",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 80,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 80
+            }
+          ]
+        },
+        {
+          "name": "/pet/{petId}",
+          "method": "GET",
+          "summary": "Find pet by ID",
+          "coverage": "COVERED",
+          "totalCases": 2,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "successful operation",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid ID supplied",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 404,
+              "totalCases": 1,
+              "description": "Pet not found",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 66.66666666666666,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 66.66666666666666
+            }
+          ]
+        },
+        {
+          "name": "/pet/{petId}",
+          "method": "POST",
+          "summary": "Updates a pet in the store with form data",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 405,
+              "totalCases": 0,
+              "description": "Invalid input",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        },
+        {
+          "name": "/pet/{petId}",
+          "method": "DELETE",
+          "summary": "Deletes a pet",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid ID supplied",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 404,
+              "totalCases": 1,
+              "description": "Pet not found",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 60,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 60
+            }
+          ]
+        },
+        {
+          "name": "/store/inventory",
+          "method": "GET",
+          "summary": "Returns pet inventories by status",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "successful operation",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 80,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 80
+            }
+          ]
+        },
+        {
+          "name": "/store/order",
+          "method": "POST",
+          "summary": "Place an order for a pet",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "successful operation",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid Order",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 60,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 60
+            }
+          ]
+        },
+        {
+          "name": "/store/order/{orderId}",
+          "method": "GET",
+          "summary": "Find purchase order by ID",
+          "coverage": "COVERED",
+          "totalCases": 2,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "successful operation",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid ID supplied",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 404,
+              "totalCases": 1,
+              "description": "Order not found",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 66.66666666666666,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 66.66666666666666
+            }
+          ]
+        },
+        {
+          "name": "/store/order/{orderId}",
+          "method": "DELETE",
+          "summary": "Delete purchase order by ID",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid ID supplied",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 404,
+              "totalCases": 1,
+              "description": "Order not found",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 60,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 60
+            }
+          ]
+        },
+        {
+          "name": "/user/createWithList",
+          "method": "POST",
+          "summary": "Creates list of users with given input array",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "successful operation",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        },
+        {
+          "name": "/user/{username}",
+          "method": "GET",
+          "summary": "Get user by user name",
+          "coverage": "COVERED",
+          "totalCases": 2,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 1,
+              "description": "successful operation",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid username supplied",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 404,
+              "totalCases": 1,
+              "description": "User not found",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 66.66666666666666,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 66.66666666666666
+            }
+          ]
+        },
+        {
+          "name": "/user/{username}",
+          "method": "PUT",
+          "summary": "Updated user",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid user supplied",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 404,
+              "totalCases": 0,
+              "description": "User not found",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        },
+        {
+          "name": "/user/{username}",
+          "method": "DELETE",
+          "summary": "Delete user",
+          "coverage": "COVERED",
+          "totalCases": 1,
+          "statusCodes": [
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid username supplied",
+              "responseCoverage": "UNCOVERED"
+            },
+            {
+              "value": 404,
+              "totalCases": 1,
+              "description": "User not found",
+              "responseCoverage": "COVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 60,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 60
+            }
+          ]
+        },
+        {
+          "name": "/user/login",
+          "method": "GET",
+          "summary": "Logs user into the system",
+          "coverage": "COVERED",
+          "totalCases": 2,
+          "statusCodes": [
+            {
+              "value": 200,
+              "totalCases": 2,
+              "description": "successful operation",
+              "responseCoverage": "COVERED"
+            },
+            {
+              "value": 400,
+              "totalCases": 0,
+              "description": "Invalid username/password supplied",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "username",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "password",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 80,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 80
+            }
+          ]
+        },
+        {
+          "name": "/user/logout",
+          "method": "GET",
+          "summary": "Logs out current logged in user session",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "successful operation",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        },
+        {
+          "name": "/user/createWithArray",
+          "method": "POST",
+          "summary": "Creates list of users with given input array",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "successful operation",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        },
+        {
+          "name": "/user",
+          "method": "POST",
+          "summary": "Create user",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "successful operation",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 40,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-08T23:13:51.655Z",
+              "totalCoverage": 40
+            }
+          ]
+        }
+      ],
+      "totalCoverage": 56,
       "totalCoverageHistory": [
         {
-          "createdAt": "2025-05-28T22:10:47.909Z",
-          "totalCoverage": 0
+          "createdAt": "2025-06-08T23:13:51.655Z",
+          "totalCoverage": 56
         }
       ]
     },
@@ -602,7 +1189,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.577Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 80
             }
           ]
@@ -647,7 +1234,7 @@
           "totalCoverage": 84,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 84
             }
           ]
@@ -677,7 +1264,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 80
             }
           ]
@@ -707,7 +1294,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 80
             }
           ]
@@ -737,7 +1324,7 @@
           "totalCoverage": 60,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 60
             }
           ]
@@ -773,7 +1360,7 @@
           "totalCoverage": 53.33333333333333,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 53.33333333333333
             }
           ]
@@ -818,7 +1405,7 @@
           "totalCoverage": 84,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 84
             }
           ]
@@ -860,7 +1447,7 @@
           "totalCoverage": 70,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 70
             }
           ]
@@ -890,7 +1477,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 80
             }
           ]
@@ -932,7 +1519,7 @@
           "totalCoverage": 50,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 50
             }
           ]
@@ -980,7 +1567,7 @@
           "totalCoverage": 48,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 48
             }
           ]
@@ -1021,7 +1608,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 80
             }
           ]
@@ -1057,7 +1644,7 @@
           "totalCoverage": 66.66666666666666,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 66.66666666666666
             }
           ]
@@ -1087,7 +1674,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 80
             }
           ]
@@ -1117,7 +1704,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 100
             }
           ]
@@ -1147,7 +1734,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2025-05-30T21:59:17.578Z",
+              "createdAt": "2025-06-09T06:57:06.956Z",
               "totalCoverage": 100
             }
           ]
@@ -1156,132 +1743,824 @@
       "totalCoverage": 74.8,
       "totalCoverageHistory": [
         {
-          "createdAt": "2025-05-28T22:10:57.173Z",
-          "totalCoverage": 8.8
-        },
-        {
-          "createdAt": "2025-05-28T22:11:01.190Z",
-          "totalCoverage": 8.8
-        },
-        {
-          "createdAt": "2025-05-28T22:11:34.449Z",
-          "totalCoverage": 13.8
-        },
-        {
-          "createdAt": "2025-05-29T05:34:54.486Z",
-          "totalCoverage": 15
-        },
-        {
-          "createdAt": "2025-05-29T19:03:23.553Z",
-          "totalCoverage": 18.8
-        },
-        {
-          "createdAt": "2025-05-29T19:03:58.291Z",
-          "totalCoverage": 20
-        },
-        {
-          "createdAt": "2025-05-29T19:55:20.320Z",
-          "totalCoverage": 23.3
-        },
-        {
-          "createdAt": "2025-05-29T19:55:41.079Z",
-          "totalCoverage": 27.1
-        },
-        {
-          "createdAt": "2025-05-30T21:50:23.036Z",
-          "totalCoverage": 32.1
-        },
-        {
-          "createdAt": "2025-05-30T21:50:35.624Z",
-          "totalCoverage": 35.2
-        },
-        {
-          "createdAt": "2025-05-30T21:50:47.708Z",
-          "totalCoverage": 35.8
-        },
-        {
-          "createdAt": "2025-05-30T21:52:08.212Z",
-          "totalCoverage": 36.5
-        },
-        {
-          "createdAt": "2025-05-30T21:52:18.892Z",
-          "totalCoverage": 40.2
-        },
-        {
-          "createdAt": "2025-05-30T21:52:31.257Z",
-          "totalCoverage": 41.5
-        },
-        {
-          "createdAt": "2025-05-30T21:53:14.092Z",
-          "totalCoverage": 41.5
-        },
-        {
-          "createdAt": "2025-05-30T21:53:25.468Z",
-          "totalCoverage": 44.5
-        },
-        {
-          "createdAt": "2025-05-30T21:55:20.297Z",
-          "totalCoverage": 49.5
-        },
-        {
-          "createdAt": "2025-05-30T21:55:32.289Z",
-          "totalCoverage": 52.8
-        },
-        {
-          "createdAt": "2025-05-30T21:55:57.900Z",
-          "totalCoverage": 52.8
-        },
-        {
-          "createdAt": "2025-05-30T21:56:11.468Z",
-          "totalCoverage": 53.6
-        },
-        {
-          "createdAt": "2025-05-30T21:56:24.612Z",
-          "totalCoverage": 57.4
-        },
-        {
-          "createdAt": "2025-05-30T21:56:48.154Z",
-          "totalCoverage": 58.6
-        },
-        {
-          "createdAt": "2025-05-30T21:56:58.961Z",
-          "totalCoverage": 64.9
-        },
-        {
-          "createdAt": "2025-05-30T21:57:12.724Z",
-          "totalCoverage": 71.1
-        },
-        {
-          "createdAt": "2025-05-30T21:57:28.886Z",
-          "totalCoverage": 71.4
-        },
-        {
-          "createdAt": "2025-05-30T21:57:43.187Z",
-          "totalCoverage": 71.6
-        },
-        {
-          "createdAt": "2025-05-30T21:57:56.743Z",
-          "totalCoverage": 71.6
-        },
-        {
-          "createdAt": "2025-05-30T21:58:09.449Z",
-          "totalCoverage": 71.6
-        },
-        {
-          "createdAt": "2025-05-30T21:58:21.866Z",
-          "totalCoverage": 71.6
-        },
-        {
-          "createdAt": "2025-05-30T21:58:50.865Z",
-          "totalCoverage": 71.6
-        },
-        {
-          "createdAt": "2025-05-30T21:59:04.828Z",
-          "totalCoverage": 71.6
-        },
-        {
-          "createdAt": "2025-05-30T21:59:17.578Z",
+          "createdAt": "2025-06-08T23:12:58.439Z",
           "totalCoverage": 74.8
+        },
+        {
+          "createdAt": "2025-06-09T06:57:06.957Z",
+          "totalCoverage": 74.8
+        }
+      ]
+    },
+    "Parabank-api-service": {
+      "endpoints": [
+        {
+          "name": "/billpay",
+          "method": "POST",
+          "summary": "Pay bill",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "accountId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "amount",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/customers/{customerId}/buyPosition",
+          "method": "POST",
+          "summary": "Buy a Position",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "accountId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "name",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "symbol",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "shares",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "pricePerShare",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/cleanDB",
+          "method": "POST",
+          "summary": "Clean the Database",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/createAccount",
+          "method": "POST",
+          "summary": "Create a new account",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "customerId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "newAccountType",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "fromAccountId",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/deposit",
+          "method": "POST",
+          "summary": "Deposit funds",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "accountId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "amount",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/accounts/{accountId}",
+          "method": "GET",
+          "summary": "Get Account by Id",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/customers/{customerId}/accounts",
+          "method": "GET",
+          "summary": "Get Customer Accounts",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/customers/{customerId}",
+          "method": "GET",
+          "summary": "Get Customer Details",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/positions/{positionId}",
+          "method": "GET",
+          "summary": "Get Position by id",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/positions/{positionId}/{startDate}/{endDate}",
+          "method": "GET",
+          "summary": "Get Position history by id within a date range",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/customers/{customerId}/positions",
+          "method": "GET",
+          "summary": "Get Positions for Customer",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/transactions/{transactionId}",
+          "method": "GET",
+          "summary": "Get the transaction for the id",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/accounts/{accountId}/transactions",
+          "method": "GET",
+          "summary": "Get the list of Transactions for the account",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/accounts/{accountId}/transactions/amount/{amount}",
+          "method": "GET",
+          "summary": "Create transactions by amount for account",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/accounts/{accountId}/transactions/month/{month}/type/{type}",
+          "method": "GET",
+          "summary": "Fetch transactions by month and type for account",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/accounts/{accountId}/transactions/fromDate/{fromDate}/toDate/{toDate}",
+          "method": "GET",
+          "summary": "Fetch transactions for date range for account",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/accounts/{accountId}/transactions/onDate/{onDate}",
+          "method": "GET",
+          "summary": "Fetch transactions for a specific date for account",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/initializeDB",
+          "method": "POST",
+          "summary": "Initialize the Database",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/login/{username}/{password}",
+          "method": "GET",
+          "summary": "Login (john/demo)",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/requestLoan",
+          "method": "POST",
+          "summary": "Request a loan",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "customerId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "amount",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "downPayment",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "fromAccountId",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/customers/{customerId}/sellPosition",
+          "method": "POST",
+          "summary": "Sell a Position",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "accountId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "positionId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "shares",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "pricePerShare",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/setParameter/{name}/{value}",
+          "method": "POST",
+          "summary": "Set Parameters",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/shutdownJmsListener",
+          "method": "POST",
+          "summary": "Stop JMS Listener",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/startupJmsListener",
+          "method": "POST",
+          "summary": "Start JMS Listener",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/transfer",
+          "method": "POST",
+          "summary": "Transfer funds",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "fromAccountId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "toAccountId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "amount",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/customers/update/{customerId}",
+          "method": "POST",
+          "summary": "Update customer information",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "firstName",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "lastName",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "street",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "city",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "state",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "zipCode",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "phoneNumber",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "ssn",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "username",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "password",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        },
+        {
+          "name": "/withdraw",
+          "method": "POST",
+          "summary": "Withdraw funds",
+          "coverage": "COVERED",
+          "totalCases": 0,
+          "statusCodes": [
+            {
+              "value": "default",
+              "totalCases": 0,
+              "description": "default response",
+              "responseCoverage": "UNCOVERED"
+            }
+          ],
+          "queryParameters": [
+            {
+              "name": "accountId",
+              "coverage": "COVERED"
+            },
+            {
+              "name": "amount",
+              "coverage": "COVERED"
+            }
+          ],
+          "requestCoverage": "MISSING",
+          "totalCoverage": 100,
+          "totalCoverageHistory": [
+            {
+              "createdAt": "2025-06-09T12:52:40.454Z",
+              "totalCoverage": 100
+            }
+          ]
+        }
+      ],
+      "totalCoverage": 100,
+      "totalCoverageHistory": [
+        {
+          "createdAt": "2025-06-09T07:15:24.867Z",
+          "totalCoverage": 100
+        },
+        {
+          "createdAt": "2025-06-09T12:52:40.454Z",
+          "totalCoverage": 100
         }
       ]
     }

@@ -48,11 +48,10 @@ Example:
   try {
     const apiCoverage = new ApiCoverage(config)
     await apiCoverage.loadSpec(spec)
-    apiCoverage.registerPostmanRequests({
+    await apiCoverage.registerPostmanRequests({
       collectionPath: resolve(process.cwd(), collection),
       coverage
     })
-    await apiCoverage.saveHistory()
     await apiCoverage.generateReport()
     console.log('API coverage report generated successfully.')
   } catch (error) {

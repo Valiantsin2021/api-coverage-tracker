@@ -44,13 +44,16 @@ For Postman collections it also tracks the previous coverage statistics. Support
   - Axios
   - Fetch
   - Custom HTTP clients (via manual registration)
-  - Postman collections coverage calculation agains openAPI specification
+  - Postman collections coverage calculation agains openAPI specification (cli or inline script)
 
-## Important changes between 1.0.4 and 1.1.0 versions:
+## Important changes between 2.0.0 and 1.6.1 versions:
 
-- Methods `saveHistory` and `generateReport` do not need any parameters anymore.
-- Paths to reports files shold be provided in the config.json file - see the below example.
-- History of the coverage changes is now reflected in HTML report for Axios and Fetch clients
+- Methods `saveHistory` is removed and no more needed.
+- config.json file obligatory fields are updated. Now only the base path to reports files should be provided in the config.json file - see the below example. 
+- History of the coverage changes is now reflected in HTML report and stored individually per service for all supported clients
+- History is tracked for test runs with as minimum of 10 minutes intervals (this limitation is made to unify the behaviour between clients because the Playwright spawns new workers if API test fails and this is causing the reset of the stats)
+- Support for Postman collections coverage calculation agains openAPI specification with cli command or inlline script
+- To maintain the history of the test coverage - do not delete appropriate service json files from the output directory
 
 ## Installation
 
@@ -62,19 +65,16 @@ npm install -D api-coverage-tracker
 The library requires a configuration object with service information:
 
 
-- services: An array of service objects with the following properties:
-  - key: A unique identifier for the service
+- services: An array of service objects (APIs) with the following properties:
+  - key: A unique identifier for the service (obligatory)
   - name: The name of the service
   - tags: An array of tags associated with the service
   - repository: The repository URL for the service
-  - swaggerUrl: The URL of the OpenAPI/Swagger specification
-  - swaggerFile: The local path to the OpenAPI/Swagger specification file
-- json-report-path: The path to save the JSON report file
-- json-report-history-path: The path to save the JSON history file
-- html-report-path: The path to save the HTML report file
-- stats-path: The path to save the statistics file
+  - swaggerUrl: The URL of the OpenAPI/Swagger specification (obligatory if no swaggerFile is provided)
+  - swaggerFile: The local path to the OpenAPI/Swagger specification file (obligatory if no swaggerUrl is provided)
+- report-path: The path to save the statistics and reports file (obligatory)
 
-```javascript
+```json
 // config.json example
 {
   "html-report-path": "./coverage/report.html",
@@ -88,10 +88,7 @@ The library requires a configuration object with service information:
       "swaggerFile": "./specs/petstore.json"
     }
   ],
-  "json-report-path": "./reports/report.json",
-  "json-report-history-path": "./reports/history.json",
-  "html-report-path": "./reports/index.html",
-  "stats-path": "./reports/stats.json"
+  "report-path": "./reports"
 }
 ```
 
@@ -122,6 +119,8 @@ console.log('Coverage stats:', stats);
 
 ### With Playwright
 
+without fixture
+
 ```javascript
 import { test } from '@playwright/test';
 import { ApiCoverage } from 'api-coverage-tracker'
@@ -135,7 +134,6 @@ test.beforeEach(async ({ request }) => {
 })
 
 test.afterEach(async ({ request }) => {
-  apiCoverage.saveHistory()
   apiCoverage.stopTracking(request) // always runs even on test failure
 })
 test.afterAll(async () => {
@@ -146,8 +144,57 @@ test('API coverage test', async ({ request }) => {
   // Make API requests
   const response = await request.get('/api/pets');
   expect(petstporeResponse).toBeOK()
-  expect(petstporeResponse.status()).toBe(200)
 });
+```
+
+with fixture
+
+```javascript
+// fixture.js
+
+import * as base from '@playwright/test'
+import { ApiCoverage } from 'api-coverage-tracker'
+import config from '../config.json' with { type: 'json' }
+
+export { expect } from '@playwright/test'
+const apiCoverage = new ApiCoverage(config)
+await apiCoverage.loadSpec('https://parabank.parasoft.com/parabank/services/bank/openapi.yaml')
+apiCoverage.setDebug(false)
+
+const extension = {
+  testHook: [
+    async ({ request }, use) => {
+      apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'basic' })
+      await use()
+      apiCoverage.stopTracking(request)
+      await apiCoverage.generateReport()
+    },
+    { auto: true, scope: 'test' }
+  ]
+}
+export const test = base.test.extend(extension)
+
+// test file
+
+import { expect, test } from '@fixtures/fixture.js'
+
+test('POST Start JMS Listener /startupJmsListener', async ({ request }) => {
+  const response = await request.post('startupJmsListener')
+  expect.soft(response.status()).toBe(204)
+})
+test('POST Clean the Database /cleanDatabase', async ({ request }) => {
+  const response = await request.post('cleanDB')
+  expect.soft(response.status()).toBe(204)
+})
+test('POST Initialize the Database /initializeDatabase', async ({ request }) => {
+  const response = await request.post('initializeDB')
+  expect.soft(response.status()).toBe(204)
+})
+test('POST Set Parameters /setParameter/:name/:value', async ({ request }) => {
+  const response = await request.post(`setParameter/product/account`)
+  expect.soft(response.status()).toBe(204)
+})
+
 ```
 
 ### With Axios
@@ -176,7 +223,6 @@ async function testApi() {
     apiCoverage.stopTracking(axiosInstance);
     const stats = apiCoverage.getCoverageStats();
     console.log('Coverage stats:', stats);
-    apiCoverage.saveHistory()
 
     apiCoverage.generateReport()
   }
@@ -203,7 +249,6 @@ async function testApi() {
     
     const stats = apiCoverage.getCoverageStats();
     console.log('Coverage stats:', stats);
-    apiCoverage.saveHistory()
 
     apiCoverage.generateReport()
   }
@@ -228,7 +273,6 @@ async function testApi() {
   
   const stats = apiCoverage.getCoverageStats();
   console.log('Coverage stats:', stats);
-  apiCoverage.saveHistory()
 
   apiCoverage.generateReport()
 }
@@ -246,11 +290,6 @@ setupNodeEvents(on, config) {
     apiCoverage.registerRequest(method, url, response)
     return null
   },
-
-  // Task to save API history
-  saveApiHistory() {
-    return apiCoverage.saveHistory().then(() => null)
-  },
   // Task to generate the API coverage report
   generateApiReport() {
     return apiCoverage.generateReport().then(() => {
@@ -266,9 +305,6 @@ before(() => {
   cy.task('loadApiSpec', './automation-excersize-spec.json').then(() => {
     Cypress.log({ name: 'API Coverage', message: 'Spec loaded successfully' })
   })
-})
-afterEach(() => {
-  cy.task('saveApiHistory')
 })
 after(() => {
   cy.task('generateApiReport').then(() => {
@@ -305,17 +341,14 @@ const apiCoverage = new ApiCoverage(config)
 const openAPISpec = 'https://fakestoreapi.com/fakestoreapi.json'
 const collectionPath = './e2e/data/FakeStoreAPI.postman_collection.json'
 await apiCoverage.loadSpec(openAPISpec)
-apiCoverage.registerPostmanRequests({ collectionPath, coverage: 'basic' })
-await apiCoverage.saveHistory()
+await apiCoverage.registerPostmanRequests({ collectionPath, coverage: 'basic' })
 await apiCoverage.generateReport()
 
 ```
 
-### Saving and Loading Coverage History
+### Saving and Loading Coverage History occurs automatically
 
 ```javascript
-// Save coverage history to a file
-apiCoverage.saveHistory();
 
 // Generate a final html and json reports from history
 apiCoverage.generateReport();
@@ -406,10 +439,6 @@ Manually register a request as covered.
 Get coverage statistics.
 
 - Returns: Object containing coverage statistics
-
-### `saveHistory()`
-
-Save current coverage state to a history file.
 
 ### `generateReport()`
 

@@ -7,7 +7,7 @@ import fs from 'fs'
  * @property {string} method - HTTP method
  * @property {string} path - Normalized request path
  * @property {Array<{key: string, value: string}>} queryParams - Query parameters
- * @property {Array<string>} statuses - Expected status codes from tests
+ * @property {Object.<string, number>} statuses - Expected status codes from tests
  */
 
 /**
@@ -25,7 +25,6 @@ export class PostmanParser {
    * @param {boolean} [options.debug=false] Enable debug logging
    */
   constructor(options = {}) {
-    this.basePath = options.basePath || ''
     this.debug = options.debug || false
   }
 
@@ -197,6 +196,7 @@ export class PostmanParser {
    * @returns {Object.<string, number>} Status codes and their counts
    */
   #parseTestScripts(events) {
+    /** @type {Object.<string, number>} */
     const statusCodes = {}
 
     if (!Array.isArray(events)) return {}
@@ -224,16 +224,12 @@ export class PostmanParser {
   }
 
   /**
-   * Normalize API path by removing base path and ensuring proper format
+   * Normalize API path by ensuring proper format
    * @param {string} path Raw path
    * @returns {string} Normalized path
    */
   #normalizePath(path) {
     let normalized = path
-
-    if (this.basePath && normalized.startsWith(this.basePath)) {
-      normalized = normalized.substring(this.basePath.length)
-    }
 
     if (!normalized.startsWith('/')) {
       normalized = '/' + normalized
@@ -254,30 +250,7 @@ export class PostmanParser {
       console.log(`[PostmanParser] ${message}`)
     }
   }
-  /**
-   * Register requests with ApiCoverage instance
-   * @param {object} options options instance
-   * @param {string} options.postmanCollection postman collection path
-   * @param {object} options.apiCoverage ApiCoverage instance
-   * @param {string} options.coverage coverage level
-   */
-  registerRequests(options = { postmanCollection: '', apiCoverage: {}, coverage: 'basic' }) {
-    const { postmanCollection, apiCoverage, coverage } = options
-    const requests = this.parseCollection(postmanCollection)
-    requests.forEach(entry => {
-      Object.entries(entry.statuses).forEach(([status, count]) => {
-        apiCoverage.registerRequest(
-          entry.method,
-          entry.path,
-          { status: parseInt(status) },
-          entry.queryParams.reduce((obj, param) => ({ ...obj, [param]: 'value' }), {}),
-          coverage
-        )
-      })
-    })
-  }
 }
 export const parser = new PostmanParser({
-  basePath: '/api/v1',
   debug: false
 })

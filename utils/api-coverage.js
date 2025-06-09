@@ -50,11 +50,11 @@ export class ApiCoverage {
     this.queryParamsCoverage = new Map()
     this.coverageType = 'basic'
     this.config = config
+    this.BASE_PATH = config['report-path']
     this.TEMPLATE_PATH = path.resolve(__dirname, './templates/index.html')
-    this.JSON_REPORT_PATH = config['json-report-path']
-    this.JSON_REPORT_HISTORY_PATH = config['json-report-history-path']
-    this.REPORT_PATH = config['html-report-path']
-    this.STATS_PATH = config['stats-path']
+    this.JSON_REPORT_PATH = `${config['report-path']}/report.json`
+    this.JSON_REPORT_HISTORY_PATH = `${config['report-path']}/history.json`
+    this.REPORT_PATH = `${config['report-path']}/report.html`
   }
 
   /**
@@ -91,6 +91,11 @@ export class ApiCoverage {
    * await apiCoverage.loadSpec('./swagger.json');
    */
   async loadSpec(source) {
+    if (!fs.existsSync(this.JSON_REPORT_HISTORY_PATH)) {
+      // Create empty history file if it doesn't exist
+      await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify([], null, 2))
+      this.log(`Created new empty history file at ${this.JSON_REPORT_HISTORY_PATH}`)
+    }
     this.config.source = source
     if (this.apiSpec) return this.apiSpec
     try {
@@ -277,7 +282,7 @@ export class ApiCoverage {
             }
 
             this.log(`Tracking request: ${method.toUpperCase()} ${pathname}`)
-            this.#markEndpointCovered(method.toUpperCase(), pathname, response.status(), queryParams)
+            await this.#markEndpointCovered(method.toUpperCase(), pathname, response.status(), queryParams)
           } catch (error) {
             console.warn(`Failed to track request: ${method} ${url}`, error)
           }
@@ -341,7 +346,7 @@ export class ApiCoverage {
         }
 
         this.log(`Tracking Axios request: ${method} ${pathname}`)
-        const result = this.#markEndpointCovered(method, pathname, response.status, queryParams)
+        const result = await this.#markEndpointCovered(method, pathname, response.status, queryParams)
         this.log(`Endpoint coverage result: ${result}`)
       } catch (error) {
         console.warn(`Failed to track Axios request: ${config.method} ${config.url}`, error)
@@ -392,7 +397,7 @@ export class ApiCoverage {
             }
 
             this.log(`Tracking Axios ${method}: ${method.toUpperCase()} ${pathname}`)
-            const result = this.#markEndpointCovered(method.toUpperCase(), pathname, response.status, queryParams)
+            const result = await this.#markEndpointCovered(method.toUpperCase(), pathname, response.status, queryParams)
             this.log(`Endpoint coverage result: ${result}`)
           } catch (error) {
             console.warn(`Failed to track Axios ${method}: ${method} ${url}`, error)
@@ -456,7 +461,7 @@ export class ApiCoverage {
         }
 
         this.log(`Tracking request: ${method} ${pathname}`)
-        this.#markEndpointCovered(method, pathname, response.status, queryParams)
+        await this.#markEndpointCovered(method, pathname, response.status, queryParams)
       } catch (error) {
         console.warn(`Failed to track request: ${init?.method || 'GET'} ${input}`, error)
       }
@@ -471,9 +476,9 @@ export class ApiCoverage {
    * @param {string} path - Request path (/api/users, etc.)
    * @param {number} statusCode - HTTP status code
    * @param {Object} [queryParams={}] - Query parameters used in the request
-   * @returns {boolean} - Whether the endpoint was successfully marked as covered
+   * @returns {Promise<boolean>} - Whether the endpoint was successfully marked as covered
    */
-  #markEndpointCovered(method, path, statusCode, queryParams = {}) {
+  async #markEndpointCovered(method, path, statusCode, queryParams = {}) {
     this.log(`Marking endpoint as covered: ${method} ${path} (status: ${statusCode})`)
 
     // Create a copy of the path to avoid modifying the parameter
@@ -547,7 +552,7 @@ export class ApiCoverage {
         this.log(`Marked query parameter as covered: ${matchedEndpointKey} - ${paramName}`)
       }
     }
-
+    await this.#saveHistory()
     return true
   }
 
@@ -558,36 +563,47 @@ export class ApiCoverage {
    * @param {Object} response - Response object with status() or status property
    * @param {Object} [queryParams={}] - Query parameters used in the request
    * @param {string} [coverage='basic'] - Coverage type ('basic', 'detailed')
-   * @returns {boolean} - Whether the registration was successful
+   * @returns {Promise<boolean>} - Whether the registration was successful
    * @example
    * apiCoverage.registerRequest('GET', '/api/users', { status: 200 }, { page: 1 });
    */
-  registerRequest(method, path, response, queryParams = {}, coverage = 'basic') {
+  async registerRequest(method, path, response, queryParams = {}, coverage = 'basic') {
     this.coverageType = coverage
     this.log(`Manually registering: ${method} ${path}`)
     const statusCode = typeof response.status === 'function' ? response.status() : response.status
-    return this.#markEndpointCovered(method.toUpperCase(), path, statusCode, queryParams)
+    return await this.#markEndpointCovered(method.toUpperCase(), path, statusCode, queryParams)
   }
   /**
    * Register requests from a Postman collection
    * @param {Object} params - Configuration options
    * @param {string} params.collectionPath - Path to Postman collection file
    * @param {'basic' | 'detailed'} params.coverage - Coverage type ('basic', 'detailed')
-   * @returns {void}
+   * @returns {Promise<void>}
    * @example
-   * apiCoverage.registerPostmanRequests('./collection.json', 'detailed');
+   * await apiCoverage.registerPostmanRequests({
+   *   collectionPath: './collection.json',
+   *   coverage: 'detailed'
+   * });
    */
-  registerPostmanRequests(params = { collectionPath: '', coverage: 'basic' }) {
+  async registerPostmanRequests(params = { collectionPath: '', coverage: 'basic' }) {
     const { collectionPath, coverage } = params
     this.log(`Registering requests from Postman collection: ${collectionPath}`)
-    const options = {
-      postmanCollection: collectionPath,
-      apiCoverage: this,
-      coverage: coverage
-    }
-
     try {
-      parser.registerRequests(options)
+      const requests = parser.parseCollection(collectionPath)
+
+      // Process requests sequentially to avoid race conditions
+      for (const entry of requests) {
+        for (const [status, count] of Object.entries(entry.statuses)) {
+          await this.registerRequest(
+            entry.method,
+            entry.path,
+            { status: parseInt(status) },
+            entry.queryParams.reduce((obj, param) => ({ ...obj, [param]: 'value' }), {}),
+            coverage
+          )
+        }
+      }
+
       this.log('Successfully registered Postman collection requests')
     } catch (error) {
       throw new Error(`Failed to register Postman requests: ${error.message}`)
@@ -730,50 +746,113 @@ S   */
   }
 
   /**
+   * Acquire a lock for file operations
+   * @param {string} lockFilePath - Path to the lock file
+   * @param {number} [maxRetries=5] - Maximum number of retries
+   * @param {number} [retryDelay=1000] - Delay between retries in milliseconds
+   * @returns {Promise<boolean>} - Whether lock was acquired successfully
+   */
+  async #acquireLock(lockFilePath, maxRetries = 5, retryDelay = 1000) {
+    let retries = 0
+    while (retries < maxRetries) {
+      try {
+        await fs.promises.writeFile(lockFilePath, process.pid.toString(), { flag: 'wx' })
+        this.log(`Lock acquired for ${lockFilePath}`)
+        return true
+      } catch (error) {
+        if (error.code === 'EEXIST') {
+          try {
+            const lockContent = await fs.promises.readFile(lockFilePath, 'utf-8')
+            const lockPid = parseInt(lockContent, 10)
+
+            try {
+              process.kill(lockPid, 0)
+              await new Promise(resolve => setTimeout(resolve, retryDelay))
+              retries++
+              continue
+            } catch (killError) {
+              await fs.promises.unlink(lockFilePath)
+              continue
+            }
+          } catch (readError) {
+            retries++
+            continue
+          }
+        }
+        throw error
+      }
+    }
+    return false
+  }
+
+  /**
+   * Release a file lock
+   * @param {string} lockFilePath - Path to the lock file
+   * @returns {Promise<void>}
+   */
+  async #releaseLock(lockFilePath) {
+    try {
+      await fs.promises.unlink(lockFilePath)
+      this.log(`Lock released for ${lockFilePath}`)
+    } catch (error) {
+      this.log(`Warning: Failed to release lock: ${error.message}`)
+    }
+  }
+
+  /**
    * Save current coverage state to a history file
    * @returns {Promise<void>}
    * @throws {Error} - Throws an error if file operations fail
-   * @example
-   * await apiCoverage.saveHistory();
    */
-  async saveHistory() {
+  async #saveHistory() {
     if (!this.JSON_REPORT_HISTORY_PATH) {
       throw new Error('JSON report history path is not set in config.json')
     }
     this.log(`Saving coverage history to ${this.JSON_REPORT_HISTORY_PATH}`)
 
-    const history = []
+    const lockFilePath = `${this.JSON_REPORT_HISTORY_PATH}.lock`
+    const lockAcquired = await this.#acquireLock(lockFilePath)
 
-    for (const [key, info] of this.coverageMap.entries()) {
-      const statuses = {}
-      for (const [status, count] of info.statuses.entries()) {
-        statuses[status] = count
+    if (!lockAcquired) {
+      throw new Error('Failed to acquire lock for history file')
+    }
+
+    try {
+      const history = []
+
+      for (const [key, info] of this.coverageMap.entries()) {
+        const statuses = {}
+        for (const [status, count] of info.statuses.entries()) {
+          statuses[status] = count
+        }
+
+        // Include query parameters in history
+        const queryParams = this.queryParamsCoverage.has(key) ? Array.from(this.queryParamsCoverage.get(key)) : []
+
+        history.push({
+          method: info.method,
+          path: info.path,
+          statuses,
+          queryParams
+        })
       }
 
-      // Include query parameters in history
-      const queryParams = this.queryParamsCoverage.has(key) ? Array.from(this.queryParamsCoverage.get(key)) : []
+      this.log(`Writing ${history.length} entries to history file`)
 
-      history.push({
-        method: info.method,
-        path: info.path,
-        statuses,
-        queryParams
-      })
+      if (!fs.existsSync(this.JSON_REPORT_HISTORY_PATH)) {
+        await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify(history, null, 2))
+        this.log(`Created new history file with ${history.length} entries`)
+      } else {
+        const existing = JSON.parse(await fs.promises.readFile(this.JSON_REPORT_HISTORY_PATH, 'utf-8'))
+        const merged = this.#mergeHistory(existing, history)
+        await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify(merged, null, 2))
+        this.log(`Merged with existing history file, total entries: ${merged.length}`)
+      }
+
+      this.log(`Coverage history saved to ${this.JSON_REPORT_HISTORY_PATH}`)
+    } finally {
+      await this.#releaseLock(lockFilePath)
     }
-
-    this.log(`Writing ${history.length} entries to history file`)
-
-    if (!fs.existsSync(this.JSON_REPORT_HISTORY_PATH)) {
-      await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify(history, null, 2))
-      this.log(`Created new history file with ${history.length} entries`)
-    } else {
-      const existing = JSON.parse(await fs.promises.readFile(this.JSON_REPORT_HISTORY_PATH, 'utf-8'))
-      const merged = this.#mergeHistory(existing, history)
-      await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify(merged, null, 2))
-      this.log(`Merged with existing history file, total entries: ${merged.length}`)
-    }
-
-    this.log(`Coverage history saved to ${this.JSON_REPORT_HISTORY_PATH}`)
   }
 
   /**
@@ -828,7 +907,7 @@ S   */
    * await apiCoverage.generateReport();
    */
   async generateReport() {
-    if (!this.JSON_REPORT_HISTORY_PATH || !this.JSON_REPORT_PATH || !this.REPORT_PATH || !this.STATS_PATH) {
+    if (!this.BASE_PATH) {
       throw new Error('Paths to coverage reports are not set in config.json')
     }
     const history = await this.#readHistory()
@@ -848,6 +927,11 @@ S   */
 
   async #readHistory() {
     try {
+      if (!fs.existsSync(this.JSON_REPORT_HISTORY_PATH)) {
+        await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify([], null, 2))
+        this.log(`Created new empty history file at ${this.JSON_REPORT_HISTORY_PATH}`)
+        return []
+      }
       return JSON.parse(await fs.promises.readFile(this.JSON_REPORT_HISTORY_PATH, 'utf-8'))
     } catch (err) {
       throw new Error(`Failed to read history: ${err.message}`)
@@ -1088,19 +1172,23 @@ S   */
 
   async #mergeStats(report) {
     const normalizedServiceKey = this.currentService.key.replace(/[^a-zA-Z0-9]/g, '')
-    this.uniqueStatsPath = this.STATS_PATH.replace('.json', `_${normalizedServiceKey}.json`)
+    this.uniqueStatsPath = this.BASE_PATH + `/${normalizedServiceKey}.json`
     try {
-      const reportStats = report.servicesCoverage[this.currentService.key].totalCoverageHistory
+      const currentRunStats = report.servicesCoverage[this.currentService.key].totalCoverageHistory
+      const lastCurrentRunRecord = currentRunStats[currentRunStats.length - 1]
       if (!fs.existsSync(this.uniqueStatsPath)) {
-        return this.#safeWriteFile(this.uniqueStatsPath, JSON.stringify(reportStats, null, 2))
-      } else {
-        const stats = JSON.parse(await fs.promises.readFile(this.uniqueStatsPath, 'utf-8'))
-        report.servicesCoverage[this.currentService?.key].totalCoverageHistory = [...stats, ...reportStats]
-        return this.#safeWriteFile(
-          this.uniqueStatsPath,
-          JSON.stringify(report.servicesCoverage[this.currentService?.key].totalCoverageHistory, null, 2)
-        )
+        return this.#safeWriteFile(this.uniqueStatsPath, JSON.stringify([lastCurrentRunRecord], null, 2))
       }
+      const existingStats = JSON.parse(await fs.promises.readFile(this.uniqueStatsPath, 'utf-8'))
+      const tenMinutes = new Date(Date.now() - 10 * 60 * 1000) // 10 minutes ago
+      const filteredStats = existingStats.filter(record => {
+        const recordDate = new Date(record.createdAt)
+        return recordDate < tenMinutes
+      })
+      const mergedStats = [...filteredStats, lastCurrentRunRecord]
+      report.servicesCoverage[this.currentService.key].totalCoverageHistory = mergedStats
+
+      return this.#safeWriteFile(this.uniqueStatsPath, JSON.stringify(mergedStats, null, 2))
     } catch (err) {
       throw new Error('ERROR adding previous run stats ' + err.message)
     }
@@ -1115,7 +1203,7 @@ S   */
         /<script id="state" type="application\/json">[\s\S]*?<\/script>/,
         `<script id="state" type="application/json">${report}</script>`
       )
-      await fs.promises.unlink(this.JSON_REPORT_HISTORY_PATH)
+      // await fs.promises.unlink(this.JSON_REPORT_HISTORY_PATH)
       return this.#safeWriteFile(this.REPORT_PATH, html)
     } catch (err) {
       throw new Error('ERROR copying template HTML file ' + err.message)

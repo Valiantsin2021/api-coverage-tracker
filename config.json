@@ -32,10 +32,18 @@
       "repository": "",
       "swaggerUrl": "https://raw.githubusercontent.com/ServeRest/ServeRest/trunk/docs/swagger.json",
       "swaggerFile": ""
+    },
+    {
+      "key": "Parabank-api-service",
+      "name": "Parabank API",
+      "tags": [
+        "API",
+        "COVERAGE"
+      ],
+      "repository": "",
+      "swaggerUrl": "https://parabank.parasoft.com/parabank/services/bank/openapi.yaml",
+      "swaggerFile": ""
     }
   ],
-  "json-report-path": "./reports/report.json",
-  "json-report-history-path": "./reports/history.json",
-  "html-report-path": "./reports/index.html",
-  "stats-path": "./reports/stats.json"
+  "report-path": "./reports"
 }

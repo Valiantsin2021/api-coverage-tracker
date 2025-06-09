@@ -1,4 +1,4 @@
-import { expect, test } from '@fixtures/fixture.js'
+import { expect, test } from '@playwright/test'
 import { ApiCoverage } from 'api-coverage-tracker'
 import config from '../config.json' with { type: 'json' }
 
@@ -6,11 +6,10 @@ const apiCoverage = new ApiCoverage(config)
 await apiCoverage.loadSpec('https://petstore.swagger.io/v2/swagger.json')
 apiCoverage.setDebug(false)
 test.beforeEach(async ({ request }) => {
-  apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'basic' })
+  apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'detailed' })
 })
 
 test.afterEach(async ({ request }) => {
-  await apiCoverage.saveHistory()
   apiCoverage.stopTracking(request) // always runs even on test failure
 })
 test.afterAll(async () => {
