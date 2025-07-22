@@ -3,7 +3,8 @@
     "method": "GET",
     "path": "/products/{id}",
     "statuses": {
-      "200": 3
+      "200": 3,
+      "403": 1
     },
     "queryParams": []
   },
@@ -27,7 +28,8 @@
     "method": "GET",
     "path": "/products",
     "statuses": {
-      "200": 8
+      "200": 8,
+      "403": 1
     },
     "queryParams": [
       "limit",
@@ -38,7 +40,8 @@
     "method": "POST",
     "path": "/products",
     "statuses": {
-      "200": 2
+      "200": 2,
+      "403": 1
     },
     "queryParams": []
   },
@@ -359,7 +362,8 @@
     "method": "GET",
     "path": "/carts",
     "statuses": {
-      "200": 8
+      "200": 8,
+      "403": 1
     },
     "queryParams": [
       "limit",
@@ -372,7 +376,8 @@
     "method": "POST",
     "path": "/carts",
     "statuses": {
-      "200": 1
+      "200": 1,
+      "403": 1
     },
     "queryParams": []
   },
@@ -380,7 +385,8 @@
     "method": "GET",
     "path": "/carts/{id}",
     "statuses": {
-      "200": 2
+      "200": 2,
+      "403": 1
     },
     "queryParams": []
   },
@@ -404,7 +410,8 @@
     "method": "GET",
     "path": "/users",
     "statuses": {
-      "200": 7
+      "200": 7,
+      "403": 1
     },
     "queryParams": [
       "limit",
@@ -415,7 +422,8 @@
     "method": "POST",
     "path": "/users",
     "statuses": {
-      "200": 1
+      "200": 1,
+      "403": 1
     },
     "queryParams": []
   },
@@ -423,7 +431,8 @@
     "method": "GET",
     "path": "/users/{id}",
     "statuses": {
-      "200": 2
+      "200": 2,
+      "403": 1
     },
     "queryParams": []
   },
@@ -448,7 +457,8 @@
     "path": "/auth/login",
     "statuses": {
       "200": 1,
-      "401": 1
+      "401": 1,
+      "403": 1
     },
     "queryParams": []
   },
