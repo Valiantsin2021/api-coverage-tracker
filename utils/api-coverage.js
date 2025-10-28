@@ -59,23 +59,28 @@ export class ApiCoverage {
 
   /**
    * Enable or disable debug logging
+   * @param {string} level - Log level ('info', 'debug', 'error')
    * @param {boolean} enabled - Whether to enable debug logging
    * @example
    * apiCoverage.setDebug(true); // Enable debug logging
    * apiCoverage.setDebug(false); // Disable debug logging
    */
-  setDebug(enabled) {
+  setDebug(enabled, level = 'info') {
     this.debug = enabled
+    this.level = level
   }
 
   /**
    * Debug log function that only logs when debug is enabled
+   * @param {string} level - Log level ('info', 'debug', 'error')
    * @param {string} message - Message to log
    * @private
    */
-  log(message) {
+  log(level, message) {
     if (this.debug) {
-      console.log(`[ApiCoverage] ${message}`)
+      if (this.level === 'debug') console.log(`[ApiCoverage] ${message}`)
+      if (this.level === 'info') !message.includes('[DEBUG]') ? console[this.level](`[ApiCoverage] ${message}`) : null
+      if (this.level === 'error') message.includes('[ERROR]') ? console[this.level](`[ApiCoverage] ${message}`) : null
     }
   }
 
@@ -94,7 +99,7 @@ export class ApiCoverage {
     if (!fs.existsSync(this.JSON_REPORT_HISTORY_PATH)) {
       // Create empty history file if it doesn't exist
       await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify([], null, 2))
-      this.log(`Created new empty history file at ${this.JSON_REPORT_HISTORY_PATH}`)
+      this.log('info', `[INFO] Created new empty history file at ${this.JSON_REPORT_HISTORY_PATH}`)
     }
     this.config.source = source
     if (this.apiSpec) return this.apiSpec
@@ -118,11 +123,12 @@ export class ApiCoverage {
             this.apiSpec.servers[0].url.replace(/^https?:\/\/[^/]+/, '')
           : '')
 
-      this.log(`Loaded API spec with basePath: ${this.basePath}`)
-      this.log(`Parsed ${this.endpoints.size} endpoints`)
+      this.log('info', `[INFO] Loaded API spec with basePath: ${this.basePath}`)
+      this.log('info', `[INFO] Parsed ${this.endpoints.size} endpoints`)
 
       return this.apiSpec
     } catch (error) {
+      this.log('error', `[ERROR] Failed to load API spec: ${error.message}`)
       throw new Error(`Failed to load API spec: ${error.message}`)
     }
   }
@@ -154,10 +160,10 @@ export class ApiCoverage {
       }
     }
 
-    this.log(`Parsed ${this.endpoints.size} endpoints from API spec`)
+    this.log('info', `[INFO] Parsed ${this.endpoints.size} endpoints from API spec`)
     // Log all endpoints in debug mode
     for (const [key, endpoint] of this.endpoints.entries()) {
-      this.log(`Registered endpoint: ${key} (regex: ${endpoint.pathRegex})`)
+      this.log('info', `[INFO] Registered endpoint: ${key} (regex: ${endpoint.pathRegex})`)
     }
   }
 
@@ -206,7 +212,7 @@ export class ApiCoverage {
   startTracking(client, options = { clientType: 'playwright', coverage: 'basic' }) {
     // Only patch if not already patched
     if (this.originalRequest) {
-      this.log('Already tracking requests, ignoring startTracking call')
+      this.log('info', '[INFO] Already tracking requests, ignoring startTracking call')
       return
     }
 
@@ -214,7 +220,7 @@ export class ApiCoverage {
     this.clientInstance = client
     this.coverageType = options.coverage
 
-    this.log(`Starting tracking with client type: ${options.clientType}`)
+    this.log('info', `[INFO] Starting tracking with client type: ${options.clientType}`)
 
     switch (options.clientType.toLowerCase()) {
       case 'playwright':
@@ -231,6 +237,41 @@ export class ApiCoverage {
     }
 
     return true
+  }
+
+  /**
+   * Parse the URL and extract the pathname and query parameters
+   * @param {string} url - The URL to parse
+   * @returns {Object} - An object containing the pathname and query parameters
+   * @property {string} pathname - The pathname of the URL
+   * @property {Object} queryParams - The query parameters as key-value pairs
+   * @example
+   * const result = this.#parseUrlAndParams('https://api.example.com/users?id=123&active=true');
+   * console.log(result.pathname); // '/users'
+   * console.log(result.queryParams); // { id: '123', active: 'true' }
+   * */
+  #parseUrlAndParams(url) {
+    let pathname
+    let queryParams = {}
+
+    try {
+      const parsedUrl = new URL(url)
+      pathname = parsedUrl.pathname
+      for (const [key, value] of parsedUrl.searchParams.entries()) {
+        queryParams[key] = value
+      }
+    } catch {
+      const [path, query] = url.split('?')
+      pathname = path
+      if (query) {
+        const params = new URLSearchParams(query)
+        for (const [key, value] of params.entries()) {
+          queryParams[key] = value
+        }
+      }
+    }
+
+    return { pathname, queryParams }
   }
 
   /**
@@ -255,36 +296,12 @@ export class ApiCoverage {
 
           // Track this endpoint
           try {
-            // Handle both full URLs and relative paths
-            let pathname
-            let queryParams = {}
+            const { pathname, queryParams } = this.#parseUrlAndParams(url)
 
-            try {
-              const parsedUrl = new URL(url)
-              pathname = parsedUrl.pathname
-
-              // Extract query parameters
-              for (const [key, value] of parsedUrl.searchParams.entries()) {
-                queryParams[key] = value
-              }
-            } catch {
-              // If URL parsing fails, assume it's a path
-              const [path, query] = url.split('?')
-              pathname = path
-
-              // Extract query parameters if present
-              if (query) {
-                const params = new URLSearchParams(query)
-                for (const [key, value] of params.entries()) {
-                  queryParams[key] = value
-                }
-              }
-            }
-
-            this.log(`Tracking request: ${method.toUpperCase()} ${pathname}`)
+            this.log('info', `[INFO] Tracking request: ${method.toUpperCase()} ${pathname}`)
             await this.#markEndpointCovered(method.toUpperCase(), pathname, response.status(), queryParams)
           } catch (error) {
-            console.warn(`Failed to track request: ${method} ${url}`, error)
+            this.log('error', `[ERROR] Failed to track request: ${method} ${url} - ${error.message}`)
           }
 
           return response
@@ -300,7 +317,7 @@ export class ApiCoverage {
    */
   #patchAxios(axiosInstance) {
     this.axios = true
-    this.log('Patching Axios instance')
+    this.log('debug', '[DEBUG] Patching Axios instance')
 
     // Store original methods for later restoration
     this.originalRequest = {
@@ -309,7 +326,7 @@ export class ApiCoverage {
 
     // Override the request method to track usage
     axiosInstance.request = async config => {
-      this.log(`Axios request called with config: ${JSON.stringify(config)}`)
+      this.log('debug', `[DEBUG] Axios request called with config: ${JSON.stringify(config)}`)
 
       // Call the original method
       const response = await this.originalRequest.request.call(axiosInstance, config)
@@ -319,37 +336,13 @@ export class ApiCoverage {
         const method = (config.method || 'get').toUpperCase()
         const url = config.url || ''
 
-        // Handle both full URLs and relative paths
-        let pathname
-        let queryParams = {}
+        const { pathname, queryParams } = this.#parseUrlAndParams(url)
 
-        try {
-          const parsedUrl = new URL(url)
-          pathname = parsedUrl.pathname
-
-          // Extract query parameters
-          for (const [key, value] of parsedUrl.searchParams.entries()) {
-            queryParams[key] = value
-          }
-        } catch {
-          // If URL parsing fails, assume it's a path
-          const [path, query] = url.split('?')
-          pathname = path
-
-          // Extract query parameters if present
-          if (query) {
-            const params = new URLSearchParams(query)
-            for (const [key, value] of params.entries()) {
-              queryParams[key] = value
-            }
-          }
-        }
-
-        this.log(`Tracking Axios request: ${method} ${pathname}`)
+        this.log('info', `[INFO] Tracking Axios request: ${method} ${pathname}`)
         const result = await this.#markEndpointCovered(method, pathname, response.status, queryParams)
-        this.log(`Endpoint coverage result: ${result}`)
+        this.log('info', `[INFO] Endpoint coverage result: ${result}`)
       } catch (error) {
-        console.warn(`Failed to track Axios request: ${config.method} ${config.url}`, error)
+        this.log('error', `[ERROR]: Failed to track Axios request: ${config.method} ${config.url} - ${error.message}`)
       }
 
       return response
@@ -363,44 +356,20 @@ export class ApiCoverage {
 
         // Override the method to track usage
         axiosInstance[method] = async (url, data, config) => {
-          this.log(`Axios ${method} called with url: ${url}`)
+          this.log('debug', `[DEBUG] Axios ${method} called with url: ${url}`)
 
           // Call the original method
           const response = await this.originalRequest[method].call(axiosInstance, url, data, config)
 
           // Track this endpoint
           try {
-            // Handle both full URLs and relative paths
-            let pathname
-            let queryParams = {}
+            const { pathname, queryParams } = this.#parseUrlAndParams(url)
 
-            try {
-              const parsedUrl = new URL(url)
-              pathname = parsedUrl.pathname
-
-              // Extract query parameters
-              for (const [key, value] of parsedUrl.searchParams.entries()) {
-                queryParams[key] = value
-              }
-            } catch {
-              // If URL parsing fails, assume it's a path
-              const [path, query] = url.split('?')
-              pathname = path
-
-              // Extract query parameters if present
-              if (query) {
-                const params = new URLSearchParams(query)
-                for (const [key, value] of params.entries()) {
-                  queryParams[key] = value
-                }
-              }
-            }
-
-            this.log(`Tracking Axios ${method}: ${method.toUpperCase()} ${pathname}`)
+            this.log('debug', `[DEBUG] Tracking Axios ${method}: ${method.toUpperCase()} ${pathname}`)
             const result = await this.#markEndpointCovered(method.toUpperCase(), pathname, response.status, queryParams)
-            this.log(`Endpoint coverage result: ${result}`)
+            this.log('info', `[INFO] Endpoint coverage result: ${result}`)
           } catch (error) {
-            console.warn(`Failed to track Axios ${method}: ${method} ${url}`, error)
+            this.log('error', `[ERROR] Failed to track Axios ${method}: ${method} ${url} - ${error.message}`)
           }
 
           return response
@@ -408,7 +377,7 @@ export class ApiCoverage {
       }
     })
 
-    this.log('Axios instance patched successfully')
+    this.log('debug', '[DEBUG] Axios instance patched successfully')
   }
 
   /**
@@ -434,36 +403,12 @@ export class ApiCoverage {
         const method = (init?.method || 'GET').toUpperCase()
         const url = typeof input === 'string' ? input : input.url
 
-        // Handle both full URLs and relative paths
-        let pathname
-        let queryParams = {}
+        const { pathname, queryParams } = this.#parseUrlAndParams(url)
 
-        try {
-          const parsedUrl = new URL(url)
-          pathname = parsedUrl.pathname
-
-          // Extract query parameters
-          for (const [key, value] of parsedUrl.searchParams.entries()) {
-            queryParams[key] = value
-          }
-        } catch {
-          // If URL parsing fails, assume it's a path
-          const [path, query] = url.split('?')
-          pathname = path
-
-          // Extract query parameters if present
-          if (query) {
-            const params = new URLSearchParams(query)
-            for (const [key, value] of params.entries()) {
-              queryParams[key] = value
-            }
-          }
-        }
-
-        this.log(`Tracking request: ${method} ${pathname}`)
+        this.log('debug', `[DEBUG] Tracking request: ${method} ${pathname}`)
         await this.#markEndpointCovered(method, pathname, response.status, queryParams)
       } catch (error) {
-        console.warn(`Failed to track request: ${init?.method || 'GET'} ${input}`, error)
+        this.log('error', `[ERROR] Failed to track Fetch request: ${init?.method || 'GET'} ${input} - ${error.message}`)
       }
 
       return response
@@ -479,7 +424,7 @@ export class ApiCoverage {
    * @returns {Promise<boolean>} - Whether the endpoint was successfully marked as covered
    */
   async #markEndpointCovered(method, path, statusCode, queryParams = {}) {
-    this.log(`Marking endpoint as covered: ${method} ${path} (status: ${statusCode})`)
+    this.log('info', `[INFO] Marking endpoint as covered: ${method} ${path} (status: ${statusCode})`)
 
     // Create a copy of the path to avoid modifying the parameter
     let normalizedPath = path.replace(/\/$/, '')
@@ -493,33 +438,33 @@ export class ApiCoverage {
     }
 
     const exactKey = `${normalizedPath} ${method}`
-    this.log(`Looking for exact match: ${exactKey}`)
+    this.log('debug', `[DEBUG] Looking for exact match: ${exactKey}`)
 
     let matchedEndpointKey = null
 
     if (this.endpoints.has(exactKey)) {
       matchedEndpointKey = exactKey
-      this.log(`Found exact match: ${exactKey}`)
+      this.log('debug', `[DEBUG] Found exact match: ${exactKey}`)
     } else {
-      this.log(`No exact match, trying regex matching for ${normalizedPath} ${method}`)
+      this.log('debug', `[DEBUG] No exact match, trying regex matching for ${normalizedPath} ${method}`)
       for (const [key, endpoint] of this.endpoints.entries()) {
         // First check if the method matches exactly
         if (endpoint.method !== method) {
-          this.log(`Method mismatch: ${endpoint.method} !== ${method}`)
+          this.log('debug', `[DEBUG] Method mismatch: ${key} !== ${normalizedPath} ${method}`)
           continue
         }
 
         // Then check if the path matches
         if (endpoint.pathRegex.test(normalizedPath)) {
           matchedEndpointKey = key
-          this.log(`Found regex match: ${key}`)
+          this.log('debug', `[DEBUG] Found regex match: ${key}`)
           break
         }
       }
     }
 
     if (!matchedEndpointKey) {
-      this.log(`No match found for: ${method} ${normalizedPath}`)
+      this.log('debug', `[DEBUG] No match found for: ${method} ${normalizedPath}`)
       return false
     }
 
@@ -532,13 +477,13 @@ export class ApiCoverage {
         method: endpoint.method,
         statuses: new Map()
       })
-      this.log(`Added new endpoint to coverage map: ${matchedEndpointKey}`)
+      this.log('info', `[INFO] Added new endpoint to coverage map: ${matchedEndpointKey}`)
     }
 
     const record = this.coverageMap.get(matchedEndpointKey)
     record.statuses.set(statusCode, (record.statuses.get(statusCode) || 0) + 1)
-    this.log(`Updated coverage for ${matchedEndpointKey} with status ${statusCode}`)
-    this.log(`Current coverage map size: ${this.coverageMap.size}`)
+    this.log('info', `[INFO] Updated coverage for ${matchedEndpointKey} with status ${statusCode}`)
+    this.log('debug', `[DEBUG] Current coverage map size: ${this.coverageMap.size}`)
 
     // Track query parameters if any were used
     if (Object.keys(queryParams).length > 0) {
@@ -549,7 +494,7 @@ export class ApiCoverage {
       const paramSet = this.queryParamsCoverage.get(matchedEndpointKey)
       for (const paramName of Object.keys(queryParams)) {
         paramSet.add(paramName)
-        this.log(`Marked query parameter as covered: ${matchedEndpointKey} - ${paramName}`)
+        this.log('debug', `[DEBUG] Marked query parameter as covered: ${matchedEndpointKey} - ${paramName}`)
       }
     }
     await this.#saveHistory()
@@ -569,7 +514,7 @@ export class ApiCoverage {
    */
   async registerRequest(method, path, response, queryParams = {}, coverage = 'basic') {
     this.coverageType = coverage
-    this.log(`Manually registering: ${method} ${path}`)
+    this.log('info', `[INFO] Manually registering: ${method} ${path}`)
     const statusCode = typeof response.status === 'function' ? response.status() : response.status
     return await this.#markEndpointCovered(method.toUpperCase(), path, statusCode, queryParams)
   }
@@ -587,7 +532,7 @@ export class ApiCoverage {
    */
   async registerPostmanRequests(params = { collectionPath: '', coverage: 'basic' }) {
     const { collectionPath, coverage } = params
-    this.log(`Registering requests from Postman collection: ${collectionPath}`)
+    this.log('info', `[INFO] Registering requests from Postman collection: ${collectionPath}`)
     try {
       const requests = parser.parseCollection(collectionPath)
 
@@ -604,8 +549,9 @@ export class ApiCoverage {
         }
       }
 
-      this.log('Successfully registered Postman collection requests')
+      this.log('info', '[INFO] Successfully registered Postman collection requests')
     } catch (error) {
+      this.log('error', `[ERROR] Failed to register Postman collection requests: ${error.message}`)
       throw new Error(`Failed to register Postman requests: ${error.message}`)
     }
   }
@@ -620,18 +566,18 @@ export class ApiCoverage {
    */
   stopTracking(client) {
     if (!this.originalRequest) {
-      this.log('No tracking in progress, ignoring stopTracking call')
+      this.log('debug', '[DEBUG] No tracking in progress, ignoring stopTracking call')
       return false
     }
 
     const targetClient = client || this.clientInstance
 
     if (!targetClient) {
-      this.log('No client instance available to restore')
+      this.log('debug', '[DEBUG] No client instance available to restore')
       return false
     }
 
-    this.log(`Stopping tracking for client type: ${this.clientType}`)
+    this.log('debug', `[DEBUG] Stopping tracking for client type: ${this.clientType}`)
 
     // Restore original methods based on client type
     switch (this.clientType?.toLowerCase()) {
@@ -657,14 +603,14 @@ export class ApiCoverage {
         global.fetch = this.originalRequest.fetch
         break
       default:
-        this.log(`Unknown client type: ${this.clientType}`)
+        this.log('debug', `[DEBUG] Unknown client type: ${this.clientType}`)
         return false
     }
 
     this.originalRequest = null
     this.clientType = null
     this.clientInstance = null
-    this.log('Tracking stopped successfully')
+    this.log('info', '[INFO] Tracking stopped successfully')
     return true
   }
 
@@ -685,7 +631,7 @@ export class ApiCoverage {
     const covered = this.coverageMap.size
     const percentage = total > 0 ? (covered / total) * 100 : 0
 
-    this.log(`Coverage stats: ${covered}/${total} (${percentage}%)`)
+    this.log('info', `[INFO] Coverage stats: ${covered}/${total} (${percentage}%)`)
 
     const details = []
     for (const [key, info] of this.coverageMap.entries()) {
@@ -739,10 +685,10 @@ S   */
     const dir = path.dirname(filePath)
     if (!fs.existsSync(dir)) {
       await fs.promises.mkdir(dir, { recursive: true })
-      this.log(`Created directory: ${dir}`)
+      this.log('debug', `[DEBUG] Created directory: ${dir}`)
     }
     await fs.promises.writeFile(filePath, content)
-    this.log(`File written successfully: ${filePath}`)
+    this.log('debug', `[DEBUG] File written successfully: ${filePath}`)
   }
 
   /**
@@ -757,7 +703,7 @@ S   */
     while (retries < maxRetries) {
       try {
         await fs.promises.writeFile(lockFilePath, process.pid.toString(), { flag: 'wx' })
-        this.log(`Lock acquired for ${lockFilePath}`)
+        this.log('debug', `[DEBUG] Lock acquired for ${lockFilePath}`)
         return true
       } catch (error) {
         if (error.code === 'EEXIST') {
@@ -779,6 +725,7 @@ S   */
             continue
           }
         }
+        this.log('error', `[ERROR] Error acquiring lock: ${error.message}`)
         throw error
       }
     }
@@ -793,9 +740,9 @@ S   */
   async #releaseLock(lockFilePath) {
     try {
       await fs.promises.unlink(lockFilePath)
-      this.log(`Lock released for ${lockFilePath}`)
+      this.log('debug', `[DEBUG] Lock released for ${lockFilePath}`)
     } catch (error) {
-      this.log(`Warning: Failed to release lock: ${error.message}`)
+      this.log('error', `[ERROR]: Failed to release lock: ${error.message}`)
     }
   }
 
@@ -808,12 +755,13 @@ S   */
     if (!this.JSON_REPORT_HISTORY_PATH) {
       throw new Error('JSON report history path is not set in config.json')
     }
-    this.log(`Saving coverage history to ${this.JSON_REPORT_HISTORY_PATH}`)
+    this.log('debug', `[DEBUG] Saving coverage history to ${this.JSON_REPORT_HISTORY_PATH}`)
 
     const lockFilePath = `${this.JSON_REPORT_HISTORY_PATH}.lock`
     const lockAcquired = await this.#acquireLock(lockFilePath)
 
     if (!lockAcquired) {
+      this.log('error', `[ERROR]: Failed to acquire lock for history file`)
       throw new Error('Failed to acquire lock for history file')
     }
 
@@ -837,19 +785,21 @@ S   */
         })
       }
 
-      this.log(`Writing ${history.length} entries to history file`)
+      this.log('debug', `[DEBUG] Writing ${history.length} entries to history file`)
 
       if (!fs.existsSync(this.JSON_REPORT_HISTORY_PATH)) {
         await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify(history, null, 2))
-        this.log(`Created new history file with ${history.length} entries`)
+        this.log('debug', `[DEBUG] Created new history file with ${history.length} entries`)
       } else {
         const existing = JSON.parse(await fs.promises.readFile(this.JSON_REPORT_HISTORY_PATH, 'utf-8'))
         const merged = this.#mergeHistory(existing, history)
         await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify(merged, null, 2))
-        this.log(`Merged with existing history file, total entries: ${merged.length}`)
+        this.log('debug', `[DEBUG] Merged with existing history file, total entries: ${merged.length}`)
       }
 
-      this.log(`Coverage history saved to ${this.JSON_REPORT_HISTORY_PATH}`)
+      this.log('info', `[INFO] Coverage history saved to ${this.JSON_REPORT_HISTORY_PATH}`)
+    } catch (err) {
+      this.log('error', `[ERROR] saving coverage history: ${err.message}`)
     } finally {
       await this.#releaseLock(lockFilePath)
     }
@@ -929,11 +879,12 @@ S   */
     try {
       if (!fs.existsSync(this.JSON_REPORT_HISTORY_PATH)) {
         await this.#safeWriteFile(this.JSON_REPORT_HISTORY_PATH, JSON.stringify([], null, 2))
-        this.log(`Created new empty history file at ${this.JSON_REPORT_HISTORY_PATH}`)
+        this.log('debug', `[DEBUG] Created new empty history file at ${this.JSON_REPORT_HISTORY_PATH}`)
         return []
       }
       return JSON.parse(await fs.promises.readFile(this.JSON_REPORT_HISTORY_PATH, 'utf-8'))
     } catch (err) {
+      this.log('error', `[ERROR] reading coverage history: ${err.message}`)
       throw new Error(`Failed to read history: ${err.message}`)
     }
   }
@@ -1225,6 +1176,6 @@ S   */
       endpoint.covered = false
     }
 
-    this.log('Coverage tracking reset')
+    this.log('info', '[INFO] Coverage tracking reset')
   }
 }

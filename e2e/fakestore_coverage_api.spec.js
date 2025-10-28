@@ -3,8 +3,8 @@ import { expect, test } from '@playwright/test'
 import { ApiCoverage } from 'api-coverage-tracker'
 import config from '../config.json' with { type: 'json' }
 const apiCoverage = new ApiCoverage(config)
-await apiCoverage.loadSpec('https://fakestoreapi.com/fakestoreapi.json')
-apiCoverage.setDebug(false)
+await apiCoverage.loadSpec('https://fakestoreapi.com/docs-data')
+apiCoverage.setDebug(true, 'error') // Enable debug logging with 'info' level
 
 test.beforeEach(async ({ request }) => {
   apiCoverage.startTracking(request, { clientType: 'playwright', coverage: 'basic' })
@@ -99,7 +99,7 @@ test.describe('FakeStore API Tests', () => {
         data: newProduct
       })
 
-      expect.soft(response.status()).toBe(200)
+      expect.soft(response.status()).toBe(201)
       const responseBody = await response.json()
       expect.soft(responseBody).toHaveProperty('id')
       productId = responseBody.id
@@ -235,7 +235,7 @@ test.describe('FakeStore API Tests', () => {
         data: newCart
       })
 
-      expect.soft(response.status()).toBe(200)
+      expect.soft(response.status()).toBe(201)
       const responseBody = await response.json()
       expect.soft(responseBody).toHaveProperty('id')
       cartId = responseBody.id
@@ -362,7 +362,7 @@ test.describe('FakeStore API Tests', () => {
         data: newUser
       })
 
-      expect.soft(response.status()).toBe(200)
+      expect.soft(response.status()).toBe(201)
       const responseBody = await response.json()
       expect.soft(responseBody).toHaveProperty('id')
       userId = responseBody.id
@@ -449,7 +449,7 @@ test.describe('FakeStore API Tests', () => {
         data: credentials
       })
 
-      expect.soft(response.status()).toBe(200)
+      expect.soft(response.status()).toBe(201)
       const responseBody = await response.json()
       expect.soft(responseBody).toHaveProperty('token')
       authToken = responseBody.token
@@ -520,7 +520,7 @@ test.describe('FakeStore API Tests', () => {
       })
 
       // Expect error response
-      expect.soft(response.status()).toBe(200)
+      expect.soft(response.status()).toBe(201)
     })
   })
 })
