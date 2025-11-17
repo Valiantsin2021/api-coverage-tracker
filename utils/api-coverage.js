@@ -1147,7 +1147,7 @@ S   */
 
   async #generateHtmlReport() {
     try {
-      await fs.promises.cp(this.TEMPLATE_PATH, this.REPORT_PATH, { recursive: true })
+      if (!fs.existsSync(this.REPORT_PATH)) await fs.promises.cp(this.TEMPLATE_PATH, this.REPORT_PATH, { recursive: true })
       const report = await fs.promises.readFile(this.JSON_REPORT_PATH, 'utf-8')
       let html = await fs.promises.readFile(this.REPORT_PATH, 'utf-8')
       html = html.replace(
