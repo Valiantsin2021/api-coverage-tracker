@@ -47,7 +47,7 @@
       }
     ]
   },
-  "createdAt": "2026-01-25T21:10:09.427Z",
+  "createdAt": "2026-01-25T21:10:17.778Z",
   "servicesCoverage": {
     "Fakestore-api-service": {
       "endpoints": [
@@ -1201,7 +1201,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 80
             }
           ]
@@ -1246,7 +1246,7 @@
           "totalCoverage": 84,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 84
             }
           ]
@@ -1276,7 +1276,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 80
             }
           ]
@@ -1306,7 +1306,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 80
             }
           ]
@@ -1336,7 +1336,7 @@
           "totalCoverage": 60,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 60
             }
           ]
@@ -1372,7 +1372,7 @@
           "totalCoverage": 53.33333333333333,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 53.33333333333333
             }
           ]
@@ -1417,7 +1417,7 @@
           "totalCoverage": 84,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 84
             }
           ]
@@ -1459,7 +1459,7 @@
           "totalCoverage": 70,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 70
             }
           ]
@@ -1489,7 +1489,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.425Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 80
             }
           ]
@@ -1531,7 +1531,7 @@
           "totalCoverage": 50,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.426Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 50
             }
           ]
@@ -1579,7 +1579,7 @@
           "totalCoverage": 48,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.426Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 48
             }
           ]
@@ -1620,7 +1620,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.426Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 80
             }
           ]
@@ -1656,7 +1656,7 @@
           "totalCoverage": 66.66666666666666,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.426Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 66.66666666666666
             }
           ]
@@ -1686,7 +1686,7 @@
           "totalCoverage": 80,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.426Z",
+              "createdAt": "2026-01-25T21:10:17.777Z",
               "totalCoverage": 80
             }
           ]
@@ -1716,7 +1716,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.426Z",
+              "createdAt": "2026-01-25T21:10:17.778Z",
               "totalCoverage": 100
             }
           ]
@@ -1746,7 +1746,7 @@
           "totalCoverage": 100,
           "totalCoverageHistory": [
             {
-              "createdAt": "2026-01-25T21:10:09.426Z",
+              "createdAt": "2026-01-25T21:10:17.778Z",
               "totalCoverage": 100
             }
           ]
@@ -1767,7 +1767,7 @@
           "totalCoverage": 74.8
         },
         {
-          "createdAt": "2026-01-25T21:10:09.426Z",
+          "createdAt": "2026-01-25T21:10:17.778Z",
           "totalCoverage": 74.8
         }
       ]
