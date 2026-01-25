@@ -5,7 +5,7 @@ import config from '../config.json' with { type: 'json' }
 export { expect } from '@playwright/test'
 const apiCoverage = new ApiCoverage(config)
 await apiCoverage.loadSpec('https://parabank.parasoft.com/parabank/services/bank/openapi.yaml')
-apiCoverage.setDebug(false)
+apiCoverage.setDebug(true, 'error')
 
 const extension = {
   testHook: [
