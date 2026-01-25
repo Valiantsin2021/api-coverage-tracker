@@ -116,7 +116,7 @@ export class ApiCoverage {
       // Handle both OpenAPI 2.0 (Swagger) and OpenAPI 3.0+ specs
       // @ts-ignore - We know these properties exist in OpenAPI specs
       this.basePath =
-        this.apiSpec.basePath ||
+        this.apiSpec?.basePath ||
         // @ts-ignore - We know these properties exist in OpenAPI specs
         (this.apiSpec.servers && this.apiSpec.servers[0]?.url
           ? // @ts-ignore - We know these properties exist in OpenAPI specs
@@ -180,7 +180,7 @@ export class ApiCoverage {
 
     // Replace {paramName} with a regex that matches single path segment(s)
     pattern = pattern.replace(/\{[^/{}]+\}/g, '([^/]+)') // '([^/]+(?:/[^/]+)*)' - multimple path segments
-
+    this.log('debug', `[DEBUG] - pattern: ${pattern}`)
     const segments = pattern.split('/').filter(Boolean)
 
     pattern = segments
@@ -256,6 +256,7 @@ export class ApiCoverage {
 
     try {
       const parsedUrl = new URL(url)
+      this.log('debug', `[DEBUG] - url: ${url}`)
       pathname = parsedUrl.pathname
       for (const [key, value] of parsedUrl.searchParams.entries()) {
         queryParams[key] = value
@@ -387,21 +388,33 @@ export class ApiCoverage {
    */
   #patchFetch(fetchFn) {
     this.fetch = true
-    // Store original fetch for later restoration
     this.originalRequest = {
       fetch: fetchFn
     }
 
-    // Override the global fetch function
-    // @ts-ignore - We're intentionally replacing the global fetch with a compatible function
     global.fetch = async (input, init) => {
-      // Call the original fetch
       const response = await this.originalRequest.fetch(input, init)
 
-      // Track this endpoint
       try {
         const method = (init?.method || 'GET').toUpperCase()
-        const url = typeof input === 'string' ? input : input.url
+
+        let url
+        if (typeof input === 'string') {
+          url = input
+        } else if (input instanceof Request) {
+          url = input.url
+        } else if (input && typeof input === 'object' && 'url' in input) {
+          url = input.url
+        } else {
+          url = String(input)
+        }
+        this.log('debug', `[DEBUG] input type: ${typeof input}, url: ${url}`)
+
+        // Skip tracking if URL doesn't match any API server
+        if (!this.#shouldTrackRequest(url)) {
+          this.log('debug', `[DEBUG] Skipping non-API request: ${url}`)
+          return response
+        }
 
         const { pathname, queryParams } = this.#parseUrlAndParams(url)
 
@@ -412,6 +425,49 @@ export class ApiCoverage {
       }
 
       return response
+    }
+  }
+  /**
+   * Check if a URL should be tracked based on API servers
+   * @param {string} url - URL to check
+   * @returns {boolean} - Whether to track this request
+   */
+  #shouldTrackRequest(url) {
+    if (!this.apiSpec || !this.apiSpec.servers) {
+      this.log('debug', `[DEBUG] No API spec or servers defined, tracking all requests`)
+      return true
+    }
+
+    try {
+      const urlObj = new URL(url)
+      const urlOrigin = urlObj.origin
+
+      this.log('debug', `[DEBUG] Checking if should track: ${url} (origin: ${urlOrigin})`)
+
+      // Check if URL matches any defined API server
+      for (const server of this.apiSpec.servers) {
+        try {
+          const serverUrl = new URL(server.url)
+          const serverOrigin = serverUrl.origin
+
+          this.log('debug', `[DEBUG] Comparing ${urlOrigin} with server: ${server.url} (origin: ${serverOrigin})`)
+          if (urlOrigin === serverOrigin) {
+            this.log('debug', `[DEBUG] ✓ URL matches server origin, will track`)
+            return true
+          }
+        } catch (e) {
+          // If server.url is relative, assume we should track
+          this.log('debug', `[DEBUG] Server URL is relative or invalid, will track`)
+          return true
+        }
+      }
+
+      this.log('debug', `[DEBUG] ✗ URL doesn't match any server origin, will skip`)
+      return false
+    } catch (e) {
+      // If URL parsing fails, track it anyway
+      this.log('debug', `[DEBUG] URL parsing failed, will track anyway: ${e.message}`)
+      return true
     }
   }
 
@@ -940,6 +996,8 @@ S   */
   }
 
   #processEndpoint(key, endpoint, covered, statusCountsMap, queryParamsMap) {
+    this.log('debug', `[DEBUG] - key: ${key}`)
+
     const [path, method] = key.split(' ')
     const endpointKey = `${path} ${method}`
     const isCovered = covered.has(endpointKey)
@@ -1059,6 +1117,11 @@ S   */
     this.currentService = this?.config.services.find(
       service => service?.swaggerUrl === this.config.source || service?.swaggerFile === this.config.source
     )
+    this.log(
+      'debug',
+      `Source used in client: ${this.config.source} current service swaggerUrl: ${this.currentService.swaggerUrl}, service swaggerFile: ${this.currentService.swaggerFile}`
+    )
+
     return {
       config: { services },
       createdAt: new Date().toISOString(),
@@ -1114,6 +1177,7 @@ S   */
         createdAt: new Date().toISOString(),
         servicesCoverage: mergedServicesCoverage
       }
+      this.log('info', `merged report: ${mergedReport}`)
       await this.#mergeStats(mergedReport)
       return await this.#safeWriteFile(this.JSON_REPORT_PATH, JSON.stringify(mergedReport, null, 2))
     } catch (err) {

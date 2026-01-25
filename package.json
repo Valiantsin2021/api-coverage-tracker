@@ -3,6 +3,7 @@
   "version": "2.0.3",
   "description": "A universal library for tracking API coverage against OpenAPI/Swagger specifications from URL or local file. Supports Axis, Fetch, Playwright and manual registry of the responses",
   "main": "./utils/api-coverage.js",
+  "types": "./utils/api-coverage.d.ts",
   "exports": {
     ".": "./utils/api-coverage.js"
   },
@@ -14,7 +15,8 @@
     "test-axios": "node e2e/api-coverage-example.js",
     "test-playwright": "npx playwright test",
     "test-postman": "npx api-coverage-tracker --spec 'https://fakestoreapi.com/docs-data' --collection './e2e/data/FakeStoreAPI.postman_collection.json' --coverage detailed",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "bump": "npx -y npm-check-updates -u && npm prune"
   },
   "keywords": [
     "api",
@@ -37,17 +39,17 @@
   },
   "homepage": "https://github.com/Valiantsin2021/api-coverage-tracker#readme",
   "dependencies": {
-    "@apidevtools/swagger-parser": "^10.1.1"
+    "@apidevtools/swagger-parser": "^12.1.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.51.1",
-    "eslint": "^9.24.0",
-    "eslint-config-prettier": "^10.1.2",
-    "eslint-plugin-jsdoc": "^50.6.9",
+    "@playwright/test": "^1.57.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsdoc": "^62.1.0",
     "eslint-plugin-no-floating-promise": "^2.0.0",
-    "eslint-plugin-playwright": "2.2.0",
-    "prettier": "^3.5.3",
-    "axios": "^1.8.4"
+    "eslint-plugin-playwright": "2.5.0",
+    "prettier": "^3.8.0",
+    "axios": "^1.13.2"
   },
   "engines": {
     "node": ">=18.0.0"

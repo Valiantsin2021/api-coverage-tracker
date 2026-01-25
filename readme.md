@@ -60,6 +60,42 @@ For Postman collections it also tracks the previous coverage statistics. Support
 ```bash
 npm install -D api-coverage-tracker
 ```
+
+## TypeScript Support
+
+This library includes TypeScript definitions for full auto-completion support. When using in TypeScript projects, you'll get:
+
+- Auto-completion for all methods and properties
+- Type checking for method parameters and return values
+- IntelliSense for configuration objects and options
+
+```typescript
+import { ApiCoverage, ApiCoverageConfig, StartTrackingOptions } from 'api-coverage-tracker';
+
+const config: ApiCoverageConfig = {
+  services: [{
+    key: 'my-api',
+    name: 'My API',
+    tags: ['api'],
+    repository: 'https://github.com/myorg/my-api',
+    swaggerUrl: 'https://api.example.com/swagger.json'
+  }],
+  'report-path': './reports'
+};
+
+const apiCoverage = new ApiCoverage(config);
+
+// Full auto-completion available
+await apiCoverage.loadSpec('https://api.example.com/swagger.json');
+
+const options: StartTrackingOptions = {
+  clientType: 'axios',
+  coverage: 'detailed'
+};
+
+await apiCoverage.startTracking(axiosInstance, options);
+```
+
 ## Configuration
 
 The library requires a configuration object with service information:
