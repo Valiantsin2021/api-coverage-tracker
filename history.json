@@ -3,7 +3,7 @@
     "method": "GET",
     "path": "/products/{id}",
     "statuses": {
-      "200": 3
+      "200": 1
     },
     "queryParams": []
   },
@@ -27,7 +27,7 @@
     "method": "GET",
     "path": "/products",
     "statuses": {
-      "200": 8
+      "200": 1
     },
     "queryParams": [
       "limit",
@@ -38,7 +38,7 @@
     "method": "POST",
     "path": "/products",
     "statuses": {
-      "200": 2
+      "200": 1
     },
     "queryParams": []
   },
@@ -202,7 +202,7 @@
     "method": "GET",
     "path": "/pet/findByStatus",
     "statuses": {
-      "200": 1
+      "200": 2
     },
     "queryParams": [
       "status"

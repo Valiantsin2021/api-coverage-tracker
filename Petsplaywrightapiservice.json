@@ -6,5 +6,9 @@
   {
     "createdAt": "2026-01-18T19:25:40.391Z",
     "totalCoverage": 56
+  },
+  {
+    "createdAt": "2026-01-25T20:43:24.173Z",
+    "totalCoverage": 56
   }
 ]
