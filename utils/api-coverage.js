@@ -299,6 +299,13 @@ export class ApiCoverage {
           try {
             const { pathname, queryParams } = this.#parseUrlAndParams(url)
 
+            // Merge query params from Playwright options.params (passed separately from URL)
+            if (options?.params) {
+              for (const [key, value] of Object.entries(options.params)) {
+                queryParams[key] = String(value)
+              }
+            }
+
             this.log('info', `[INFO] Tracking request: ${method.toUpperCase()} ${pathname}`)
             await this.#markEndpointCovered(method.toUpperCase(), pathname, response.status(), queryParams)
           } catch (error) {
